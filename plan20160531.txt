@@ -10,11 +10,15 @@ Certain prompts that may lead to :
 -LINK TO STUDY GUIDES, ETC FOR PRACTICAL USAGE
 -ORGANIZER saves emails, maybe passwords (accessible after getting through some security check), saves information (possibility) -- similar to how a journal would be entered and saved. 
 Which jobs are most crucial?
-Most crucial part of the project would be to create the shell chatbox. Besides this being a program that interprets user commands and performs functions, it should also have responses to certain inputs and carry out conversations. The commands can prompt the other parts of the project such as pulling up journal entries or playing a mini game. 
+Most crucial part of the project would be to create the shell chatbox. Besides this being a program that interprets user commands and performs functions, it should also have responses to certain inputs and carry out conversations. The commands can prompt the other parts of the project such as pulling up journal entries or playing a mini game.  Store information, access it by keywords or date and possibly connecting to dictionary for similar words. 
 Which components constitute core functionality vs extras?
-The chatbox/shell with user inputs and different responses is the core part of this project. 
+Creating the shell would be the main part of the project. It would have different responses either with words or performing certain functions. 
 The extras are including mini games, crosswords, password/email organizer. 
 Which components are prerequisites for others?
+Each of the extras can be done individually first, but to tie everything together, the chat box would have to be functioning properly in order for the user input to open up the other components of the project like playing a game, searching for journal entry, entering journal entry, looking for study guides. 
 
 Which tasks can be delegated, and which must be collaboratively tackled?
+We should work on the chatbox shell together and at least get the user input to function with a variety number of responses. Tasks that can be delegated would be the more creative part, like coming up with different responses for an input or changing the background or the setup of the extras in the project. 
 What is the timeline, and how does it accommodate setbacks, course changes?
+TBA
+
