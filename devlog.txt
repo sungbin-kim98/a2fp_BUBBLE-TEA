@@ -1,0 +1,13 @@
+5/31/2016
+Editing Proposal 
+MAIN: Command shell / Chatbox 
+-user can write entries
+-they can be accessed through an arraylist
+-pull up dictionaries and dates from internet(?) -- 
+-chatbox acting as a shell to change modes
+-Redirects like “why don’t you try asking me about ___?”
+-Keywords like : “Study”  >>  the subject -- then lists guides. 
+Certain prompts that may lead to :
+-MINIGAMES WITH RELEVANCE TO STUY LIFE (take a break from work: have options to play some games) savable results? Maze, crossword, word search
+-LINK TO STUDY GUIDES, ETC FOR PRACTICAL USAGE
+-ORGANIZER saves emails, maybe passwords (accessible after getting through some security check), saves information (possibility) -- similar to how a journal would be entered and saved. 
