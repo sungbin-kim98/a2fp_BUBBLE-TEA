@@ -10,7 +10,7 @@ Certain prompts that may lead to :
 -LINK TO STUDY GUIDES, ETC FOR PRACTICAL USAGE
 -ORGANIZER saves emails, maybe passwords (accessible after getting through some security check), saves information (possibility) -- similar to how a journal would be entered and saved. 
 Which jobs are most crucial?
-
+Most crucial part of the project would be to create the shell chatbox. Besides this being a program that interprets user commands and performs functions, it should also have responses to certain inputs and carry out conversations. The commands can prompt the other parts of the project such as pulling up journal entries or playing a mini game. 
 Which components constitute core functionality vs extras?
 The chatbox/shell with user inputs and different responses is the core part of this project. 
 The extras are including mini games, crosswords, password/email organizer. 
