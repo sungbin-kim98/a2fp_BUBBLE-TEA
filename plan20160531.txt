@@ -1,24 +1,67 @@
-MAIN: Command shell / Chatbox 
+MAIN: Journal Entries
 -user can write entries
 -they can be accessed through an arraylist
--pull up dictionaries and dates from internet(?) -- 
+-pull up dictionaries and dates from internet
+
+MAIN: Shell / Chatbox
 -chatbox acting as a shell to change modes
--Redirects like “why don’t you try asking me about ___?”
--Keywords like : “Study”  >>  the subject -- then lists guides. 
-Certain prompts that may lead to :
+-Redirects in case of no matches â€œwhy donâ€™t you try asking me about ___?â€
+-Keywords like : â€œStudyâ€  >>  the subject -- then lists guides
+
+Certain prompts that may lead to...
 -MINIGAMES WITH RELEVANCE TO STUY LIFE (take a break from work: have options to play some games) savable results? Maze, crossword, word search
 -LINK TO STUDY GUIDES, ETC FOR PRACTICAL USAGE
--ORGANIZER saves emails, maybe passwords (accessible after getting through some security check), saves information (possibility) -- similar to how a journal would be entered and saved. 
+-ORGANIZER saves emails, maybe passwords (accessible after getting through some security check), saves information (possibility) -- similar to how a journal would be entered and saved.
+
+
+
 Which jobs are most crucial?
-Most crucial part of the project would be to create the shell chatbox. Besides this being a program that interprets user commands and performs functions, it should also have responses to certain inputs and carry out conversations. The commands can prompt the other parts of the project such as pulling up journal entries or playing a mini game.  Store information, access it by keywords or date and possibly connecting to dictionary for similar words. 
+The shell chatbox is crucial to the project.
+The shell will interpret user commands and set the user to modes depending on what they want to do.
+It may also have responses to certain inputs and carry out conversations.
+The journal entries are also very crucial.
+Users can store information, access it by keywords or dates.
+We can connect it to a dictionary for similar words. 
+
+
+
 Which components constitute core functionality vs extras?
-Creating the shell would be the main part of the project. It would have different responses either with words or performing certain functions. 
+The shell is important for core functionality. It would have different responses either with words or performing certain functions. Making an interactive journal entry is the main part of the project.
 The extras are including mini games, crosswords, password/email organizer. 
+
+
+
 Which components are prerequisites for others?
-Each of the extras can be done individually first, but to tie everything together, the chat box would have to be functioning properly in order for the user input to open up the other components of the project like playing a game, searching for journal entry, entering journal entry, looking for study guides. 
+Each of the extras can be done individually first, but the chat box would have to be functioning properly in order for the user input to open up the other components of the project.  In reality the chatbox isn't a prerequisite for the other parts of the project, but it is important for the interactive nature of our project.
+
+
 
 Which tasks can be delegated, and which must be collaboratively tackled?
-We should work on the chatbox shell together and at least get the user input to function with a variety number of responses. Tasks that can be delegated would be the more creative part, like coming up with different responses for an input or changing the background or the setup of the extras in the project. 
-What is the timeline, and how does it accommodate setbacks, course changes?
-TBA
+We should work on the chatbox shell together and at least get the user input to function with a variety number of responses. Tasks that can be delegated would be the more creative part, like coming up with different responses for an input or changing the background or the setup of the extras in the project.  We should work on the journal entries together to make it as smooth as possible.  This mostly constitutes the search.
 
+
+
+What is the timeline, and how does it accommodate setbacks, course changes?
+
+BASIC TIMELINE
+- chatbox / shell : 1/4 before project is due
+- journal entries : 2/4 before project is due
+- other features : 3/4 before project is due
+
+starts with the most difficult and gets easier to accomodate for time
+
+MORE SPECIFIC
+chatbox / shell
+- taking user input
+- different modes
+- keywords
+
+journal entries
+- ability to store entries
+- access entries
+- seaech entries
+
+other features
+- mini games
+- study guides
+- organizer
