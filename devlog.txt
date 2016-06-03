@@ -4,3 +4,6 @@ Research chatboxes and considered use of magpie lab
 Wrote out some user default dialogue and responses
 5/31/2016
 Editing proposal for the green light
+6/1/2016
+Updated plan and drew out diagram
+Went to the dojo to clarify importing dictionaries, writing to files and saving them
