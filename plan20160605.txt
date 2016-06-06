@@ -1,9 +1,9 @@
 MAIN: Journal Entries
--user can write entries
+-user can write entries that are saved in a local folder they download
 -they can be accessed through an arraylist
 -pull up dictionaries and dates from internet
 
-MAIN: Shell / Chatbox
+SUB: Shell / Chatbox
 -chatbox acting as a shell to change modes
 -Redirects in case of no matches “why don’t you try asking me about ___?”
 -Keywords like : “Study”  >>  the subject -- then lists guides
@@ -16,50 +16,53 @@ Certain prompts that may lead to...
 
 
 Which jobs are most crucial?
-The shell chatbox is crucial to the project.
-The shell will interpret user commands and set the user to modes depending on what they want to do.
-It may also have responses to certain inputs and carry out conversations.
-The journal entries are also very crucial.
+The journal entries is the most crucial.
 Users can store information, access it by keywords or dates.
 We can connect it to a dictionary for similar words. 
+The shell chatbox is also crucial to the project.
+The shell will interpret user commands and set the user to modes depending on what they want to do.
+It may also have responses to certain inputs and carry out conversations.
 
 
 
 Which components constitute core functionality vs extras?
-The shell is important for core functionality. It would have different responses either with words or performing certain functions. Making an interactive journal entry is the main part of the project.
+Making an interactive journal entry is the main part of the project.
+The shell would have different responses either with words or performing certain functions. 
 The extras are including mini games, crosswords, password/email organizer. 
 
 
 
 Which components are prerequisites for others?
-Each of the extras can be done individually first, but the chat box would have to be functioning properly in order for the user input to open up the other components of the project.  In reality the chatbox isn't a prerequisite for the other parts of the project, but it is important for the interactive nature of our project.
+The journal entries should be implemented first.
+Each of the extras can be done individually, but the chat box / menu would have to be functioning properly in order for the user input to open up the other components of the project.  In reality the chatbox isn't a prerequisite for the other parts of the project, but it is important for the interactive nature of our project.
 
 
 
 Which tasks can be delegated, and which must be collaboratively tackled?
-We should work on the chatbox shell together and at least get the user input to function with a variety number of responses. Tasks that can be delegated would be the more creative part, like coming up with different responses for an input or changing the background or the setup of the extras in the project.  We should work on the journal entries together to make it as smooth as possible.  This mostly constitutes the search.
+We should work on the journal entries together to make it as smooth as possible.  This mostly constitutes the search.  We should work on the chatbox shell together and at least get the user input to function with a variety number of responses. Tasks that can be delegated would be the more creative part, like coming up with different responses for an input or changing the background or the setup of the extras in the project.  
 
 
 
 What is the timeline, and how does it accommodate setbacks, course changes?
 
 BASIC TIMELINE
-- chatbox / shell : 1/4 before project is due
-- journal entries : 2/4 before project is due
+- journal entries : 1/4 before project is due
+- chatbox / shell : 2/4 before project is due
 - other features : 3/4 before project is due
 
 starts with the most difficult and gets easier to accomodate for time
 
 MORE SPECIFIC
-chatbox / shell
-- taking user input
-- different modes
-- keywords
 
 journal entries
 - ability to store entries
 - access entries
 - seaech entries
+
+chatbox / shell
+- taking user input
+- different modes
+- keywords
 
 other features
 - mini games
