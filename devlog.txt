@@ -7,3 +7,11 @@ Editing proposal for the green light
 6/1/2016
 Updated plan and drew out diagram
 Went to the dojo to clarify importing dictionaries, writing to files and saving them
+6/2/2016
+Looked at processing tutorials and started backgrounds
+6/3/2016
+Worked on menu in processing
+6/4/2016
+Worked on cursor in processing
+6/5/2016
+Worked on user interaction with menu
