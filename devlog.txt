@@ -54,3 +54,18 @@ Features
  or words automatically wrap around the box to prevent being interrupted.	
 
 ==============================================================
+
+==============================================================
+
+Date: 2016-06-07
+--------------------------------------------------------------
+
+User: Jennifer Yu
+Changes: Added the writing to a file feature, which the user can use to save his or her response or journal.
+
+Features
+* Once you finish writing, clicking ESC exits and creates a file called journalentry.txt
+* Everything stored will be put into the new file
+* Developing ideas for 1) formatting (fixing ENTER by telling the system to println) 2) creation of a new file each time 3) ability to edit files
+
+==============================================================
