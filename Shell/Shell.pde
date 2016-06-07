@@ -1,3 +1,4 @@
+PrintWriter journal;
 int frame = 0;
 int txtY = 0; //for even vertical spacing out between text boxes
 String txt = ""; 
@@ -13,6 +14,7 @@ void setup() {
   fill( 0 ); //color txt
   textFont( font, 20 ); //font, size( overrides the default size above )
   textLeading( 20 ); //gap between lines
+  journal = createWriter("journalentry.txt"); // Create a new file in the sketch directory
 }
 
 void draw() {
@@ -78,6 +80,12 @@ void keyPressed() {
       txt = txt.substring( 0, txt.length()-1 ); //deletes data
     }  
   }
+  else if (key == ESC) { 
+    journal.print(data);
+    journal.flush(); // Writes the remaining data to the file
+    journal.close(); // Finishes the file
+    exit(); // Stops the program
+  }
   else if( key == CODED ) {
   }
   else {
@@ -101,4 +109,5 @@ void keyPressed() {
     }  
     txt += key; //update txt
   }
+
 }
