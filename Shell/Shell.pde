@@ -62,7 +62,7 @@ void keyPressed() {
         if( textWidth( data.substring(i) ) > 495 ) {
           txt = data.substring(i);
           for( int j = txt.length()-1; j >= 0; j-- ) {
-            if( txt.charAt(j) != ' ' ) { //search for the last consonant
+            if( txt.charAt(j) != ' ' && txt.charAt(j) != '|' ) { //search for the last consonant
               txt = txt.substring(0, j+1);
               data = data.substring(0, i);
               return;
