@@ -1,3 +1,24 @@
+Team BUBBLE_TEA - Jennifer Yu, Mei Huang, Sungbin Kim
+Project -- (Temporary name) SAMANTHA
+ ______   ______   __   __   __       ______   _______     
+/_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
+\:::_ \ \\::::_\/_\:\ \\ \ \\:\ \    \:::_ \ \\::::__\/__  
+ \:\ \ \ \\:\/___/\\:\ \\ \ \\:\ \    \:\ \ \ \\:\ /____/\ 
+  \:\ \ \ \\::___\/_\:\_/.:\ \\:\ \____\:\ \ \ \\:\\_  _\/ 
+   \:\/.:| |\:\____/\\ ..::/ / \:\/___/\\:\_\ \ \\:\_\ \ \ 
+    \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/ 
+==============================================================
+
+TEMPLATE FOR DEVLOG:
+
+Date: yyyy-mm-dd
+--------------------------------------------------------------
+
+User:
+Changes:
+
+==============================================================
+
 5/29/2016
 Research chatboxes and considered use of magpie lab
 5/30/2016
@@ -15,3 +36,21 @@ Worked on menu in processing
 Worked on cursor in processing
 6/5/2016
 Worked on user interaction with menu
+
+==============================================================
+
+Date: 2016-06-07
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes: Completed the text system, which the user can use to input his or her response or journal.
+
+Features
+* Blinking cursor that guides the user
+* Store the input as a string that can be transmitted to the Samantha system, where it will either evoke a response or be saved as a journal
+* Copied the basic features of normal text system we use in daily life
+'ENTER' to skip a line (a blank line is indicated by '|' on the side)
+ or 'BACKSPACE' to delete through different lines
+ or words automatically wrap around the box to prevent being interrupted.	
+
+==============================================================
