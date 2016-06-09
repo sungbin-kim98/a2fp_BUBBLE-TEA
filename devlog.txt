@@ -69,3 +69,21 @@ Features
 * Developing ideas for 1) formatting (fixing ENTER by telling the system to println) 2) creation of a new file each time 3) ability to edit files
 
 ==============================================================
+
+==============================================================
+
+Date: 2016-06-09
+--------------------------------------------------------------
+
+User: Mei Huang 
+Changes: Added the welcome message and menu bars that change color when hovered over & 
+changed when the cursor appears. 
+ 
+Features: 
+* This will is how the program will look like when first started. 
+
+
+
+
+
+
