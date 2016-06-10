@@ -109,7 +109,21 @@ Features
 * PLANNED WITH SUNGBIN AND MEI TO BE REVAMPED TO CHAT SYSTEM STAY TUNED
 
 ==============================================================
+==============================================================
 
+Date: 2016-06-10
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes: Added TextBoxes
+
+Problems:
+ so many...
+ * For some reason, codes don't work the way I intended to, still managed to force it.
+ * how to store data in stacks and display
+ 	* as more stacked, how to scroll(?) up and down to previous msgs
+
+==============================================================
 
 
 
