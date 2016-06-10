@@ -30,49 +30,47 @@ void setup() {
 
 
 void draw() {
-  if ( compResponding == true && beg < response.length() ) {
-    background( 255 );
-    beg++;
-    delay(75);
-    text = response.substring(0, beg);
-    textY = (int)(textWidth( text ) / 300);
-    text( text, 365, 20, 300, 500 );
-    //txtBox -------------------------------------------------------------------------------------
-    textBox = createShape( GROUP );
-    leftArc = createShape( ARC, 355, 20, 20, (textY * 20) + 20, PI / 2, (3 * PI) / 2 );
-    if ( textY == 0 ) { //first line
-      rightArc = createShape( ARC, (textWidth( text ) % 300) + 355, 20, 20, 20, - PI / 2, PI / 2 );
-      box = createShape( RECT, 365, 20, (textWidth( text ) % 300), 20 );
-    } else {
-      rightArc = createShape( ARC, 655, 20, 20, (textY * 20) + 20, - PI / 2, PI / 2 );
-      box = createShape( RECT, 365, 20, 300, (textY * 20) + 20 );
+  if ( compResponding == true ) {
+    if ( beg < response.length() ) {
+      background( 255 );
+      beg++;
+      delay(75);
+      //txtBox -------------------------------------------------------------------------------------
+      textBox = createShape( GROUP );
+      leftArc = createShape( ARC, 355, 20, 20, (textY * 20) + 20, PI / 2, (3 * PI) / 2 );
+      if ( textY == 0 ) { //first line
+        rightArc = createShape( ARC, (textWidth( text ) % 300) + 355, 20, 20, 20, - PI / 2, PI / 2 );
+        box = createShape( RECT, 365, 20, (textWidth( text ) % 300), 20 );
+      } else {
+        rightArc = createShape( ARC, 655, 20, 20, (textY * 20) + 20, - PI / 2, PI / 2 );
+        box = createShape( RECT, 365, 20, 300, (textY * 20) + 20 );
+      }
+      textBox.addChild( leftArc );
+      textBox.addChild( rightArc );
+      textBox.addChild( box );
+      leftArc.setFill( color(150, 220, 250) ); //For some reason, textBox.setFill and textBox.setStroke doesnt work :(
+      rightArc.setFill( color(150, 220, 250) );
+      box.setFill( color(150, 220, 250) );
+      leftArc.setStroke( color(150, 220, 250) );
+      rightArc.setStroke( color(150, 220, 250) );
+      box.setStroke( color(150, 220, 250) );
+      strokeWeight( 5 );
+      shape( textBox );
+      //responseManipulation-------------------------------------------------------------------------
+      text = response.substring(0, beg);
+      textY = (int)(textWidth( text ) / 300);
+      text( text, 365, 20, 300, 500 );
     }
-    textBox.addChild( leftArc );
-    textBox.addChild( rightArc );
-    textBox.addChild( box );
-    leftArc.setFill( color(150, 220, 250) ); //For some reason, textBox.setFill and textBox.setStroke doesnt work :(
-    rightArc.setFill( color(150, 220, 250) );
-    box.setFill( color(150, 220, 250) );
-    leftArc.setStroke( color(150, 220, 250) );
-    rightArc.setStroke( color(150, 220, 250) );
-    box.setStroke( color(150, 220, 250) );
-    strokeWeight( 5 );
-    shape( textBox );
-    //responseManipulation-------------------------------------------------------------------------
-    text = response.substring(0, beg);
-    textY = (int)(textWidth( text ) / 300);
-    text( text, 365, 20, 300, 500 );
-  } 
+    else {
+    compTextBoxes.push( textBox );
+    compResponses.push( text );
+    //reset all the vars
+    beg = 0;
+    text = "";
+    textY = 0;
+    compResponding = false;
+  } }
   else {
-    if( compResponding == true ) {
-      compTextBoxes.push( textBox );
-      compResponses.push( text );
-      //reset all the vars
-      beg = 0;
-      text = "";
-      textY = 0;
-      compResponding = false;
-    }
     background( 255 );
     shape( compTextBoxes.peek() );
     text( compResponses.peek(), 365, 20, 300, 500 );
