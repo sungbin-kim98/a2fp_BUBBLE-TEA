@@ -91,7 +91,24 @@ Features:
 * This will is how the program will look like when first started. 
  -ISSUE: positioning of the cursor ? 
 
+==============================================================
 
+==============================================================
+
+Date: 2016-06-09
+--------------------------------------------------------------
+
+User: Jennifer Yu
+Changes: Moved the chat and cursor below the welcome message, starting to implement format changes.
+
+Features
+* Typing appears below the welcome message
+* Trying to slice up the string of text by the "|" so that the spacing looks better on journalentry.txt
+* Still working on ideas from 6/7
+* Ideas: disable typing during welcome messages
+* PLANNED WITH SUNGBIN AND MEI TO BE REVAMPED TO CHAT SYSTEM STAY TUNED
+
+==============================================================
 
 
 
