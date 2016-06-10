@@ -85,9 +85,12 @@ Date: 2016-06-09
 User: Mei Huang 
 Changes: Added the welcome message and menu bars that change color when hovered over & 
 changed when the cursor appears. 
+Changes: Took out above part - part of idea altered. 
  
 Features: 
 * This will is how the program will look like when first started. 
+ -ISSUE: positioning of the cursor ? 
+
 
 
 
