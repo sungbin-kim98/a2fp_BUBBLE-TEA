@@ -1,175 +1,191 @@
 PrintWriter journal;
 int frame = 0;
-int txtY = 0; //for even vertical spacing out between text boxes
-int beg = 0; //printing first line 
-int rectColor1, rectColor2, rectColor3, rectColor4 = 235;
-String txt = ""; 
+int textY = 0; //for even vertical spacing out between text boxes
+int beg = 0;
+//int rectColor1, rectColor2, rectColor3, rectColor4 = 235;
+String text = ""; 
 String data = ""; //storage of txt that will be transmitted to the system.
-String welcome = "Welcome to Turtle Shell! Here you can talk to me or write journal entries just to get things off your chest."; 
+String response = "Welcome to Turtle Shell! Here you can talk to me or write journal entries just to get things off your chest."; //computer's response
+Boolean compResponding = true;
 PFont font, bfont;
-PShape txtCursor;
-
-
+PShape textCursor, textBox, leftArc, rightArc, box;
+ALStack<String> compResponses = new ALStack<String>();
+ALStack<PShape> userTextBoxes = new ALStack<PShape>();
+ALStack<PShape> compTextBoxes = new ALStack<PShape>();
 
 void setup() {
-  size( 500, 500 );
+  size( 700, 500 ); 
   background( 255 );
-//  bfont = createFont("fantasy", 15, true);   
-  //for font
+  ellipseMode( CORNER );
+  //bfont = createFont("fantasy", 15, true);   
+  //for font --------------------------------------------------------------------
   font = createFont( "Calibri", 20, true ); //font, size, anti-aliasing(?)
-  fill( 0 ); //color txt
+  fill( 255 );
   textFont( font, 20 ); //font, size( overrides the default size above )
   textLeading( 20 ); //gap between lines
+  //-----------------------------------------------------------------------------
   journal = createWriter("journalentry.txt"); // Create a new file in the sketch directory
-//menu font 
+  //menu font
 }
 
 
 void draw() {
-  background(160,160,260); //resets the screen
-  text( data, 5, 50, 495, 500 );
-  text( txt, 5, txtY * 20 + 50, 495, 500 ); //display text within a box
-  
-  if (beg < welcome.length()) {
-    beg++; 
-   // delay(75);
-    text(welcome.substring(0,beg), 5, 1, 495, 500 );
-    fill(255); 
-  }
-  else { 
-    delay(100); 
-    text(welcome,5,0,495,500); 
-  }
-  
-  
-  
-  //for txtCursor -----------------------------------------------------
-  txtCursor = createShape( ELLIPSE, (textWidth( txt ) % 495) + 10, (txtY * 20) + 65, 5, 5 );
-  txtCursor.setStroke( false ); //noStroke
-  
-   if (beg < welcome.length()) {
-    beg++; 
+  if ( compResponding == true && beg < response.length() ) {
+    background( 255 );
+    beg++;
     delay(75);
-    text(welcome.substring(0,beg), 5, 1, 495, 500 );
-    fill(255); 
-  }
-  else { 
-    delay(100); 
-    text(welcome,5,0,495,500);
-
-  if( frame % 30 < 15 ) { //blinking every 15 frames
-    txtCursor.setFill( color(0) ); //black
-  }
+    text = response.substring(0, beg);
+    textY = (int)(textWidth( text ) / 300);
+    text( text, 365, 20, 300, 500 );
+    //txtBox -------------------------------------------------------------------------------------
+    textBox = createShape( GROUP );
+    leftArc = createShape( ARC, 355, 20, 20, (textY * 20) + 20, PI / 2, (3 * PI) / 2 );
+    if ( textY == 0 ) { //first line
+      rightArc = createShape( ARC, (textWidth( text ) % 300) + 355, 20, 20, 20, - PI / 2, PI / 2 );
+      box = createShape( RECT, 365, 20, (textWidth( text ) % 300), 20 );
+    } else {
+      rightArc = createShape( ARC, 655, 20, 20, (textY * 20) + 20, - PI / 2, PI / 2 );
+      box = createShape( RECT, 365, 20, 300, (textY * 20) + 20 );
+    }
+    textBox.addChild( leftArc );
+    textBox.addChild( rightArc );
+    textBox.addChild( box );
+    leftArc.setFill( color(150, 220, 250) ); //For some reason, textBox.setFill and textBox.setStroke doesnt work :(
+    rightArc.setFill( color(150, 220, 250) );
+    box.setFill( color(150, 220, 250) );
+    leftArc.setStroke( color(150, 220, 250) );
+    rightArc.setStroke( color(150, 220, 250) );
+    box.setStroke( color(150, 220, 250) );
+    strokeWeight( 5 );
+    shape( textBox );
+    //responseManipulation-------------------------------------------------------------------------
+    text = response.substring(0, beg);
+    textY = (int)(textWidth( text ) / 300);
+    text( text, 365, 20, 300, 500 );
+  } 
   else {
-    txtCursor.setFill( color(255) ); //white
+    if( compResponding == true ) {
+      compTextBoxes.push( textBox );
+      compResponses.push( text );
+      //reset all the vars
+      beg = 0;
+      text = "";
+      textY = 0;
+      compResponding = false;
+    }
+    background( 255 );
+    shape( compTextBoxes.peek() );
+    text( compResponses.peek(), 365, 20, 300, 500 );
+    //txtBox -----------------------------------------------------------
+    textBox = createShape( GROUP );
+    leftArc = createShape( ARC, 20, 20, 20, (textY * 20) + 20, PI / 2, (3 * PI) / 2 );
+    if ( textY == 0 ) { //first line
+      rightArc = createShape( ARC, (textWidth( text ) % 300) + 20, 20, 20, 20, - PI / 2, PI / 2 );
+      box = createShape( RECT, 30, 20, (textWidth( text ) % 300), 20 );
+    } else {
+      rightArc = createShape( ARC, 320, 20, 20, (textY * 20) + 20, - PI / 2, PI / 2 );
+      box = createShape( RECT, 30, 20, 300, (textY * 20) + 20 );
+    }
+    textBox.addChild( leftArc );
+    textBox.addChild( rightArc );
+    textBox.addChild( box );
+    leftArc.setFill( color(150, 220, 250) ); //For some reason, textBox.setFill and textBox.setStroke doesnt work :(
+    rightArc.setFill( color(150, 220, 250) );
+    box.setFill( color(150, 220, 250) );
+    leftArc.setStroke( color(150, 220, 250) );
+    rightArc.setStroke( color(150, 220, 250) );
+    box.setStroke( color(150, 220, 250) );
+    strokeWeight( 5 );
+    shape( textBox );
+    //textCursor --------------------------------------------------------
+    textCursor = createShape( ELLIPSE, (textWidth( text ) % 300) + 30, (textY * 20) + 30, 5, 5 );
+    textCursor.setStroke( false ); //noStroke
+    if ( frame % 30 < 15 ) { //blinking every 15 frames
+      textCursor.setFill( color(255) ); //black
+    } else {
+      textCursor.setFill( color(150, 220, 250) ); //white
+    }
+    shape( textCursor );
+    //-------------------------------------------------------------------
+    text( data, 30, 20, 300, 500 );
+    text( text, 30, textY * 20 + 20, 300, 500 ); //display text within a box
+    frame++;
   }
-  shape( txtCursor );
-  //-------------------------------------------------------------------
-  frame++;
 }
-}
-
-
 
 
 void keyPressed() {
-  if( key == ENTER || key == RETURN ) { //check both ENTER and RETURN for crossplatform
-    txtY++;
-    for( int i = 0; i < txt.length(); i++ ) {
-      if( txt.charAt(i) != ' ' ) {
-        while( textWidth( txt ) < 495 ) { // fill up a line
-          txt += " ";
-        }
-        data += txt;
-        txt = "";
-        return;
-      }
-    }
-    txt = "|"; //when a line is empty 
-    while( textWidth( txt ) < 495 ) { // fill up a line
-      txt += " ";
-    }
-    data += txt;
-    txt = "";
-  }
-  else if( key == BACKSPACE || key == DELETE ) {
-    if( data.length() <= 0 && txt.length() <= 0 ) {
-    }
-    else if( txt.length() <= 0 ) {
-      txtY--;
-      for( int i = data.length()-1; i >= 0; i-- ) {
-        if( textWidth( data.substring(i) ) > 495 ) {
-          txt = data.substring(i).trim();
-          /*---------------------------REVISION after discovering 'trim()'----------------------------
-          for( int j = txt.length()-1; j >= 0; j-- ) {
-            if( txt.charAt(j) != ' ' && txt.charAt(j) != '|' ) { //search for the last consonant
-              txt = txt.substring(0, j+1);
-              data = data.substring(0, i);
-              return;
-            }
-          }*/
-          if( txt.equals( "|" ) ) {
-            txt = ""; // this is when you skipped a line using enter or return
+  if ( compResponding == true ) { //If computer is typing don't do anything
+  } else {
+    if ( key == ENTER || key == RETURN ) { //check both ENTER and RETURN for crossplatform
+      textY++;
+      for ( int i = 0; i < text.length(); i++ ) {
+        if ( text.charAt(i) != ' ' ) {
+          while ( textWidth( text ) < 300 ) { // fill up a line
+            text += " ";
           }
-          data = data.substring(0, i);
-          break;
-        }
-      }
-    }
-    else {
-      txt = txt.substring( 0, txt.length()-1 ); //deletes data
-    }  
-  }
-  else if (key == ESC) { 
-    journal.print(data);
-    journal.flush(); // Writes the remaining data to the file
-    journal.close(); // Finishes the file
-    exit(); // Stops the program
-  }
-  else if( key == CODED ) {
-  }
-  else {
-    if( textWidth( txt + key ) > 495 ) { //to prevent cursor misplacement
-      txtY++;
-      for( int i = txt.length()-1; i >= 0; i-- ) {
-        if( txt.charAt(i) == ' ' ) {
-          String tmp = "";
-          tmp = txt.substring(0,i);
-          while( textWidth( tmp ) < 495 ) {
-            tmp += " ";
-          }
-          data += tmp;
-          txt = txt.substring(i+1); //i+1 because of a random space
-          txt += key;           
+          data += text;
+          text = "";
           return;
         }
-      }   
-      data += txt;
-      txt = "";   
-    }  
-    txt += key; //update txt
-  }
-
-}
-
-/**
-CODE SNIPPETS TO DEAL WITH ENTER FORMATTING
-AFTER IF KEY == ESC
-    String data2 = "";
-    while (enters > 0) {
-      data2 = data.substring(0, data.indexOf("|"));
+      }
+      text = "|"; //when a line is empty 
+      while ( textWidth( text ) < 300 ) { // fill up a line
+        text += " ";
+      }
+      data += text;
+      text = "";
+    } else if ( key == BACKSPACE || key == DELETE ) {
+      if ( data.length() <= 0 && text.length() <= 0 ) {
+      } else if ( text.length() <= 0 ) {
+        textY--;
+        for ( int i = data.length()-1; i >= 0; i-- ) {
+          if ( textWidth( data.substring(i) ) > 300 ) {
+            text = data.substring(i).trim();
+            /*---------------------------REVISION after discovering 'trim()'----------------------------
+             for( int j = txt.length()-1; j >= 0; j-- ) {
+             if( txt.charAt(j) != ' ' && txt.charAt(j) != '|' ) { //search for the last consonant
+             txt = txt.substring(0, j+1);
+             data = data.substring(0, i);
+             return;
+             }
+             }*/
+            if ( text.equals( "|" ) ) {
+              text = ""; // this is when you skipped a line using enter or return
+            }
+            data = data.substring(0, i);
+            break;
+          }
+        }
+      } else {
+        text = text.substring( 0, text.length()-1 ); //deletes data
+      }
+    } else if (key == ESC) { 
       journal.print(data);
-      enters--;
+      journal.flush(); // Writes the remaining data to the file
+      journal.close(); // Finishes the file
+      exit(); // Stops the program
+    } else if ( key == CODED ) {
+    } else {
+      if ( textWidth( text + key ) > 300 ) { //to prevent cursor misplacement
+        textY++;
+        for ( int i = text.length()-1; i >= 0; i-- ) {
+          if ( text.charAt(i) == ' ' ) {
+            String tmp = "";
+            tmp = text.substring(0, i);
+            while ( textWidth( tmp ) < 300 ) {
+              tmp += " ";
+            }
+            data += tmp;
+            text = text.substring(i+1); //i+1 because of a random space
+            text += key;           
+            return;
+          }
+        }   
+        data += text;
+        text = "";
+      }  
+      text += key; //update txt
     }
-
-int enters = 0;
-String tempdata = data;
-void countnumenters() {
-  int currentIndex = tempdata.indexOf("|");
-  while (currentIndex >= 0) {
-    enters++;
-    tempdata = tempdata.substring(currentIndex);
-    countnumenters();
   }
 }
-**/
