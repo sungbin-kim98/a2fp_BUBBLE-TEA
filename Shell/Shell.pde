@@ -87,6 +87,61 @@ void draw() {
   //for txtCursor -----------------------------------------------------
   txtCursor = createShape( ELLIPSE, (textWidth( txt ) % 495) + 10, (txtY * 20) + 15, 5, 5 );
   txtCursor.setStroke( false ); //noStroke
+  
+   if (beg < welcome.length()) {
+    beg++; 
+   // delay(75);
+    text(welcome.substring(0,beg), 5, 1, 495, 500 );
+    fill(255); 
+  }
+  else { 
+    delay(100); 
+    text(welcome,5,0,495,500);
+    option1 = createShape(RECT, 50, 115, 170, 100);
+    option1.setStroke(0); 
+    option1.setFill(rectColor1); 
+    option2 = createShape(RECT, 275, 115, 170, 100);
+    option2.setStroke(0); 
+    option2.setFill(rectColor2); 
+    option3 = createShape(RECT, 50, 280, 170, 100);
+    option3.setStroke(0); 
+    option3.setFill(rectColor3); 
+    option4 = createShape(RECT, 275, 280, 170, 100);
+    option4.setStroke(0); 
+    option4.setFill(rectColor4); 
+    textSize(40);
+    text("TURTLE SHELL", 130, 100); 
+    textSize(20);
+    shape(option1); 
+    text("Journal Entry", 80, 170); 
+    shape(option2); 
+    text("Game", 320, 175); 
+    shape(option3); 
+    text("Something", 80, 340); 
+    shape(option4);
+    text("Another thing", 290, 340); 
+    textAlign(CORNER); 
+    
+    if (mouseX > 50 && mouseX < 220 && mouseY > 115 && mouseY < 215) { 
+    rectColor1 = 10;  
+    } 
+    else if (mouseX > 275 && mouseX < 475 && mouseY > 115 && mouseY < 215) { 
+    rectColor2 = 10; 
+  }
+   else if (mouseX > 50 && mouseX < 220 && mouseY > 280 && mouseY < 380) { 
+    rectColor3 = 10;
+   } 
+   else if (mouseX > 275 && mouseX < 475 && mouseY > 280 && mouseY < 380) { 
+     rectColor4 = 10;
+   }
+  else { 
+    rectColor1 = 235; 
+    rectColor2 = 235; 
+    rectColor3 = 235; 
+    rectColor4 = 235; 
+  }
+  
+
   if( frame % 30 < 15 ) { //blinking every 15 frames
     txtCursor.setFill( color(0) ); //black
   }
@@ -96,6 +151,9 @@ void draw() {
   shape( txtCursor );
   //-------------------------------------------------------------------
   frame++;
+}
+
+
 }
 
 void keyPressed() {
