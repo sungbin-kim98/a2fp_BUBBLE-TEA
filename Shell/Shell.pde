@@ -161,7 +161,13 @@ void keyPressed() {
         text = text.substring( 0, text.length()-1 ); //deletes data
       }
     } else if (key == ESC) { 
-      journal.print(data);
+        while (data.indexOf("|") >= 0) {
+          String data2 = data.substring(0, data.indexOf("|"));
+          journal.println(data2.trim());
+          data = data.substring(data.indexOf("|")+1);
+        }
+      journal.println(data);
+      journal.println(text);
       journal.flush(); // Writes the remaining data to the file
       journal.close(); // Finishes the file
       exit(); // Stops the program
