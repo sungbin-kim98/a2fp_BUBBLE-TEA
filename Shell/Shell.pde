@@ -27,8 +27,8 @@ void setup() {
 
 void draw() {
   background(160,160,260); //resets the screen
-  text( data, 5, 0, 495, 500 );
-  text( txt, 5, txtY * 20, 495, 500 ); //display text within a box
+  text( data, 5, 50, 495, 500 );
+  text( txt, 5, txtY * 20 + 50, 495, 500 ); //display text within a box
   
   if (beg < welcome.length()) {
     beg++; 
@@ -44,7 +44,7 @@ void draw() {
   
   
   //for txtCursor -----------------------------------------------------
-  txtCursor = createShape( ELLIPSE, (textWidth( txt ) % 495) + 10, (txtY * 20) + 15, 5, 5 );
+  txtCursor = createShape( ELLIPSE, (textWidth( txt ) % 495) + 10, (txtY * 20) + 65, 5, 5 );
   txtCursor.setStroke( false ); //noStroke
   
    if (beg < welcome.length()) {
@@ -151,3 +151,25 @@ void keyPressed() {
   }
 
 }
+
+/**
+CODE SNIPPETS TO DEAL WITH ENTER FORMATTING
+AFTER IF KEY == ESC
+    String data2 = "";
+    while (enters > 0) {
+      data2 = data.substring(0, data.indexOf("|"));
+      journal.print(data);
+      enters--;
+    }
+
+int enters = 0;
+String tempdata = data;
+void countnumenters() {
+  int currentIndex = tempdata.indexOf("|");
+  while (currentIndex >= 0) {
+    enters++;
+    tempdata = tempdata.substring(currentIndex);
+    countnumenters();
+  }
+}
+**/
