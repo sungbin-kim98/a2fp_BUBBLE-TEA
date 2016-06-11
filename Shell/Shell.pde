@@ -5,11 +5,12 @@ int beg = 0;
 //int rectColor1, rectColor2, rectColor3, rectColor4 = 235;
 String lastLineText = ""; // only for user
 String text = ""; //storage of txt that will be transmitted to the system.
-String response = "Welcome to Turtle Shell!"; //computer's response
-Boolean compResponding = true;
+String compText = "Welcome to Turtle Shell!"; //computer's response
+Boolean compTexting = true;
 PFont font, bfont;
 PShape textCursor, textBox, leftArc, rightArc, box;
-ALStack<String> compResponses = new ALStack<String>();
+ALStack<String> userTexts = new ALStack<String>();
+ALStack<String> compTexts = new ALStack<String>();
 ALStack<PShape> userTextBoxes = new ALStack<PShape>();
 ALStack<PShape> compTextBoxes = new ALStack<PShape>();
 
@@ -29,8 +30,8 @@ void setup() {
 
 
 void draw() {
-  if ( compResponding == true ) {
-    if ( beg < response.length() ) {
+  if ( compTexting == true ) {
+    if ( beg < compText.length() ) {
       background( 255 );
       beg++;
       delay(50);
@@ -55,25 +56,25 @@ void draw() {
       box.setStroke( color(150, 220, 250) );
       strokeWeight( 5 );
       shape( textBox );
-      //response------------------------------------------------------------------------------------
-      text = response.substring(0, beg);
+      //compText------------------------------------------------------------------------------------
+      text = compText.substring(0, beg);
       textHeight = (int)(textWidth( text ) / 350);
-      text( text, 420, 20, 350, 600 ); //display computer's response
+      text( text, 420, 20, 350, 600 ); //display computer's compText
     }
     else {
       compTextBoxes.push( textBox );
-      compResponses.push( text );
+      compTexts.push( text );
       //reset all the vars
       beg = 0;
       text = "";
       textHeight = 0;
-      compResponding = false;
+      compTexting = false;
     } 
   }
   else {
     background( 255 );
     shape( compTextBoxes.peek() );
-    text( compResponses.peek(), 420, 20, 350, 600 );
+    text( compTexts.peek(), 420, 20, 350, 600 );
     //txtBox -----------------------------------------------------------
     textBox = createShape( GROUP );
     leftArc = createShape( ARC, 20, 20, 20, (textHeight * 20) + 20, PI / 2, (3 * PI) / 2 );
@@ -113,7 +114,7 @@ void draw() {
 
 
 void keyPressed() {
-  if ( compResponding == true ) { //If computer is typing don't do anything
+  if ( compTexting == true ) { //If computer is typing don't do anything
   } else {
     if ( key == ENTER || key == RETURN ) { //check both ENTER and RETURN for crossplatform
       textHeight++;
@@ -165,7 +166,7 @@ void keyPressed() {
     } else {
       if ( textWidth( lastLineText + key ) > 350 ) { //to prevent cursor misplacement
         textHeight++;
-        for ( int i = text.length()-1; i >= 0; i-- ) {
+        for ( int i = lastLineText.length()-1; i > 0; i-- ) {
           if ( lastLineText.charAt(i) == ' ' ) { //finds the beginning of the last word that will be wrapped around 
             String tmp = "";
             tmp = lastLineText.substring(0, i);
