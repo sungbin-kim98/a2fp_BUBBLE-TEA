@@ -142,6 +142,22 @@ for clarification
 * changed the size of the page
 
 ==============================================================
+==============================================================
 
+Date: 2016-06-11
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes: Messages Upgrade!
+
+features:
+* messages push down according to the size of other's response
+* only works when each responses once to each other. This is our standard now.
+* ArrayLists store each data and serves as a stack (Last in first out)
+
+Prospect:
+* Now I have to work on the cursor that will be used to view previous messages that are out of the page.
+
+==============================================================
 
 
