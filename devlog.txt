@@ -161,3 +161,15 @@ Prospect:
 ==============================================================
 
 
+Date: 2016 - 06 - 11 
+User : Mei Huang 
+Changes : Chatbox and user inputs / computer responses creating 
+
+features 
+*Introduction welcoming user and asking for name. 
+*Certain responses will lead to different computer responses. 
+
+Problems:  
+- not sure why the lastLine only prints one word sometimes 
+- want to be able save the name when first inputed
+- transform certain texts based on certain keywords

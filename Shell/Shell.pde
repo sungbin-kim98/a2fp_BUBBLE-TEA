@@ -1,11 +1,11 @@
 PrintWriter journal;
+
 int frame = 0;
 int textHeight = 0; //for even vertical spacing out between text boxes
 int beg = 0;
-//int rectColor1, rectColor2, rectColor3, rectColor4 = 235;
 String lastLineText = ""; // only for user
 String text = ""; //storage of txt that will be transmitted to the system.
-String compText = "Welcome to Turtle Shell!"; //computer's response
+String compText = "Welcome to Turtle Shell! This is an interactive chatbox. For now let's introduce ourselves. My name is Jane."; //computer's response
 Boolean compTexting = true;
 Boolean shellMode = true;
 PFont font, bfont;
@@ -18,8 +18,7 @@ ArrayList<PShape> compTextBoxes = new ArrayList<PShape>();
 void setup() {
   size( 800, 600 ); 
   background( 255 );
-  ellipseMode( CORNER );
-  //bfont = createFont("fantasy", 15, true);   
+  ellipseMode( CORNER );  
   //for font --------------------------------------------------------------------
   font = createFont( "Calibri", 20, true ); //font, size, anti-aliasing(?)
   fill( 255 ); //color text
@@ -31,11 +30,12 @@ void setup() {
 
 
 void draw() {
+
   if ( compTexting == true ) {
     if ( beg < compText.length() ) {
       background( 255 );
       beg++;
-      delay(50);
+      delay(30);
       //DISPLAY PREVIOUS TEXTS ---------------------------------------------------------------------
       int currentTextHeight = textHeight; // stores the value of current textHeight that user was using
 
@@ -145,7 +145,38 @@ void draw() {
     frame++;
   }
 }
+int findKeyword(String statement, String goal, int startPos) {
+    String phrase = statement.trim();
+    // The only change to incorporate the startPos is in the line below
+    int psn = phrase.toLowerCase().indexOf(goal.toLowerCase(), startPos);
 
+    // Refinement--make sure the goal isn't part of a word
+    while (psn >= 0) {
+      // Find the string of length 1 before and after the word
+      String before = " ", after = " ";
+      if (psn > 0) {
+        before = phrase.substring(psn - 1, psn).toLowerCase();
+      }
+
+      if (psn + goal.length() < phrase.length()) {
+        after = phrase.substring(
+          psn + goal.length(),
+          psn + goal.length() + 1).toLowerCase();
+      }
+
+      // If before and after aren't letters, we've found the word
+      if (((before.compareTo("a") < 0) || (before.compareTo("z") > 0))
+        && ((after.compareTo("a") < 0) || (after.compareTo("z") > 0))) {
+        return psn;
+      }
+
+      // The last position didn't work, so let's find
+      // the next, if there is one.
+      psn = phrase.indexOf(goal.toLowerCase(), psn + 1);
+
+    }
+    return -1;
+  }
 
 void keyPressed() {
   if ( compTexting == true ) { //If computer is typing don't do anything
@@ -230,6 +261,24 @@ void keyPressed() {
         lastLineText = "";
       }  
       lastLineText += key; //update txt
+      //not sure why the lastLine only prints one word sometimes 
+      //save the name when first inputed 
+      if ((findKeyword(compText, "name", 0) >= 0) || (findKeyword(lastLineText, "name", 0) >= 0)) {
+        compText = "Hi " + lastLineText + ". Now here's the fun stuff. This is also a journal -- a place you can let all yo feelings out. When you want to write journals just press AIEfzlk";
+      }
+        //gnna do transform statements. 
+        /***
+        else if (findKeyword(lastLineText, "my name is", 0) >= 0 )) { 
+  
     }
+    ***/ 
+      else if (lastLineText.equals(" ")) { 
+        compText = "Say something. Don't be boring"; 
+       
+      }
+      else if (findKeyword(lastLineText, "no",0) >= 0) {
+        compText = "Why so negative?";
+    }
+  }
   }
 }
