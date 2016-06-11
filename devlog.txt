@@ -55,10 +55,15 @@ Features
 
 Breakthroughs:
 * keeping the even space between texts and the cursor horizontally and vertically.
-	* Before the breakthrough, I used mod and quotient of the length of the total texts to locate the 		cursor. However, a problem occurred as you write more because the length is a float not int, so the 		discrepancy between the rounded and actual location of the cursor increased.
+	* Before the breakthrough, I used mod and quotient of the length of the total texts to locate the 		
+	cursor. However, a problem occurred as you write more because the length is a float not int, so the 		
+	discrepancy between the rounded and actual location of the cursor increased.
 		* Fixed problems two ways
-			* Horizontally, I noticed that the first line always works fine (when the discrepancy 			is not so significant). So I broke down the entire texts into two parts: data and txt. 			Txt is where the user is currently interacting with and data are the stored txt.
-			* Vertically, I added a global variable 'txtY' to nullify the effect of decimals 				stacking up when taking quotient of the length of the data.  
+			* Horizontally, I noticed that the first line always works fine (when the discrepancy 			
+			is not so significant). So I broke down the entire texts into two parts: data and txt. 			
+			Txt is where the user is currently interacting with and data are the stored txt.
+			* Vertically, I added a global variable 'txtY' to nullify the effect of decimals 				
+			stacking up when taking quotient of the length of the data.  
 
 ==============================================================
 
@@ -124,7 +129,19 @@ Problems:
  	* as more stacked, how to scroll(?) up and down to previous msgs
 
 ==============================================================
+==============================================================
 
+Date: 2016-06-11
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes: Minor Changes
+
+* Changed names of global variable text -> lastLineText and data -> text
+for clarification
+* changed the size of the page
+
+==============================================================
 
 
 
