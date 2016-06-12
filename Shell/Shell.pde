@@ -35,7 +35,7 @@ void draw() {
     if ( beg < compText.length() ) {
       background( 255 );
       beg++;
-      delay(30);
+      delay(15);
       //DISPLAY PREVIOUS TEXTS ---------------------------------------------------------------------
       int currentTextHeight = textHeight; // stores the value of current textHeight that user was using
 
@@ -226,10 +226,12 @@ void keyPressed() {
             break;
           }
         }
-      } else { //if not at the front of a line
+      } 
+      else { //if not at the front of a line
         lastLineText = lastLineText.substring( 0, lastLineText.length()-1 ); //deletes data
       }
-    } else if (key == ESC) { 
+       } 
+       else if (key == ESC) { 
       while (text.indexOf("|") >= 0) {
         String data2 = text.substring(0, text.indexOf("|"));
         journal.println(data2.trim());
@@ -260,25 +262,42 @@ void keyPressed() {
         text += lastLineText;
         lastLineText = "";
       }  
+      
       lastLineText += key; //update txt
-      //not sure why the lastLine only prints one word sometimes 
-      //save the name when first inputed 
-      if ((findKeyword(compText, "name", 0) >= 0) || (findKeyword(lastLineText, "name", 0) >= 0)) {
-        compText = "Hi " + lastLineText + ". Now here's the fun stuff. This is also a journal -- a place you can let all yo feelings out. When you want to write journals just press AIEfzlk";
+        
+      if (findKeyword(lastLineText.toLowerCase(), "my name is", 0) >= 0) { 
+          String changeLLT = lastLineText.trim(); 
+          int psn = findKeyword(lastLineText.toLowerCase(), "my name is", 0); 
+          changeLLT = lastLineText.substring(psn+10).trim(); 
+          compText = "Hi " + changeLLT + ". This is also a place you can let all yo feelings out. If you would like to enter a journal entry now, type journal. Once you're done, click ESC and it'll be saved! Don't want to write a journal? Just have a chat with me. Type chat.";
       }
-        //gnna do transform statements. 
-        /***
-        else if (findKeyword(lastLineText, "my name is", 0) >= 0 )) { 
-  
-    }
-    ***/ 
-      else if (lastLineText.equals(" ")) { 
-        compText = "Say something. Don't be boring"; 
        
+      else if (findKeyword(lastLineText.toLowerCase(), "i am", 0) >= 0) { 
+        String changeLLT = lastLineText.trim(); 
+        int psn = findKeyword(lastLineText.toLowerCase(), "i am", 0); 
+          changeLLT = lastLineText.substring(psn+4).trim(); 
+          compText = "Hi " + changeLLT + ". This is also a place you can let all yo feelings out. If you would like to enter a journal entry now, type journal. Once you're done, click ESC and it'll be saved! Don't want to write a journal? Just have a chat with me. Type chat."; }      
+    
+      //not sure why when you just type it the name. It only saves the first letter?
+      else if (findKeyword(compText, "Welcome", 0) >= 0) {
+        String changeLLT = lastLineText.trim();
+        compText = "Hi " + changeLLT + ". This is also a place you can let all yo feelings out. If you would like to enter a journal entry now, type journal. Once you're done, click ESC and it'll be saved! Don't want to write a journal? Just have a chat with me. Type chat.";
       }
-      else if (findKeyword(lastLineText, "no",0) >= 0) {
+      else if (lastLineText.toLowerCase().equals("journal")) { 
+      compText = "Here's your journal. Talk about your mood, what you did today, how was your day, what'd you eat? Anything really."; 
+      }
+      else if (lastLineText.toLowerCase().equals("chat")) { 
+        //here should be a list of randomly generated responses; (Use alstack, so things won't be repeated. pop (remove) 
+        compText = "Hello, let's talk. Tell me something."; 
+      }
+      else if ((lastLineText.length() == 1) && (lastLineText.equals(" "))) { 
+        compText = "Say something. Don't be boring";
+      }
+      else if (findKeyword(lastLineText, "no" , 0) >= 0) {
         compText = "Why so negative?";
     }
-  }
+     else { compText = "Uhhh.. type journal or chat....ITS NOT THAT HARD."; 
+    }
   }
 }
+  }

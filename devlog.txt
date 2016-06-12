@@ -173,3 +173,16 @@ Problems:
 - not sure why the lastLine only prints one word sometimes 
 - want to be able save the name when first inputed
 - transform certain texts based on certain keywords
+
+Date: 2016 - 06 - 11 
+User : Mei Huang 
+Changes : Continued working on the chatting part of the project 
+-Names: "I am ____" & "my name is ___" is strung so that the bot will read only the name
+and not the beginning. 
+-Other responses will allow bot to give prompts and other possible commands. 
+
+Problems: 
+-not sure why when you just type in the name without my name is, it only saves the first letter?
+
+*Now have to connect the journal to the chatbox as well as transforming sentences and 
+adding a variety of responses to a stack. 
