@@ -8,15 +8,16 @@ String text = ""; //storage of txt that will be transmitted to the system.
 String compText = "Hey there, my name is Jane. What's yours? "; //computer's response
 Boolean compTexting = true;
 Boolean shellMode = true;
+Boolean scrollBarOn = false;
 PFont font, bfont;
-PShape textCursor, textBox, leftArc, rightArc, box;
+PShape textCursor, textBox, leftArc, rightArc, box, scrollBar, scroll;
 ArrayList<String> userTexts = new ArrayList<String>();
 ArrayList<String> compTexts = new ArrayList<String>();
 ArrayList<PShape> userTextBoxes = new ArrayList<PShape>();
 ArrayList<PShape> compTextBoxes = new ArrayList<PShape>();
 
 void setup() {
-  size( 800, 600 ); 
+  size( 830, 600 ); 
   background( 255 );
   ellipseMode( CORNER );  
   //for font --------------------------------------------------------------------
@@ -30,20 +31,46 @@ void setup() {
 
 
 void draw() {
-  if ( compTexting == true ) {
+  if ( compTexting == true ) {// -----------------------------------------------------------------------------COMPUTER
     if ( beg < compText.length() ) {
       background( 255 );
       beg++;
       delay(15);
+      //Scrollbar ----------------------------------------------------------------------------------
+      println( getTotalHeight() );
+      if( getTotalHeight() > 580 ) {
+        scrollBarOn = true;
+      }
+      if( scrollBarOn == true ) {
+        scrollBar = createShape( GROUP );
+        leftArc = createShape( ARC, 800, 10, 20, 20, PI, 2 * PI );
+        box = createShape( RECT, 800, 20, 20, 560 );
+        rightArc = createShape( ARC, 800, 570, 20, 20, 0, PI );
+        scrollBar.addChild( leftArc );
+        scrollBar.addChild( box );
+        scrollBar.addChild( rightArc );
+        leftArc.setFill( color(150, 220, 250) );
+        rightArc.setFill( color(150, 220, 250) );
+        box.setFill( color(150, 220, 250) );
+        leftArc.setStroke( color(150, 220, 250) );
+        rightArc.setStroke( color(150, 220, 250) );
+        box.setStroke( color(150, 220, 250) );
+        strokeWeight(5);
+        shape( scrollBar );
+        
+        scroll = createShape( ELLIPSE, 800, 10, 20, 20 );
+        scroll.setFill( color(255) ); //white
+        scroll.setStroke( false );
+        shape( scroll );
+      }
       //DISPLAY PREVIOUS TEXTS ---------------------------------------------------------------------
-      int currentTextHeight = textHeight; // stores the value of current textHeight that user was using
-
+      int currentTextHeight = textHeight; // stores the value of current textHeight that comp was using
+  
       pushMatrix();
       for ( int i = userTextBoxes.size()-1; i >= 0; i-- ) { //=userTexts.size()
         translate( 0, (textHeight * 20) + 30 );
         shape( userTextBoxes.get(i) );
         text( userTexts.get(i), 30, 20, 350, 600 );
-
         textHeight = (int)((textWidth( userTexts.get(i) )) / 350);
         translate( 0, (textHeight * 20) + 30 );
         shape( compTextBoxes.get(i) );
@@ -87,8 +114,35 @@ void draw() {
       text = "";
       compTexting = false;
     }
-  } else {
+  } else { //----------------------------------------------------------------------------------------------USER
     background( 255 );
+    //Scrollbar ----------------------------------------------------------------------------------
+    println( getTotalHeight() );
+    if( getTotalHeight() > 580 ) {
+      scrollBarOn = true;
+    }
+    if( scrollBarOn == true ) {
+      scrollBar = createShape( GROUP );
+      leftArc = createShape( ARC, 800, 10, 20, 20, PI, 2 * PI );
+      box = createShape( RECT, 800, 20, 20, 560 );
+      rightArc = createShape( ARC, 800, 570, 20, 20, 0, PI );
+      scrollBar.addChild( leftArc );
+      scrollBar.addChild( box );
+      scrollBar.addChild( rightArc );
+      leftArc.setFill( color(150, 220, 250) );
+      rightArc.setFill( color(150, 220, 250) );
+      box.setFill( color(150, 220, 250) );
+      leftArc.setStroke( color(150, 220, 250) );
+      rightArc.setStroke( color(150, 220, 250) );
+      box.setStroke( color(150, 220, 250) );
+      strokeWeight(5);
+      shape( scrollBar );
+      
+      scroll = createShape( ELLIPSE, 800, 10, 20, 20 );
+      scroll.setFill( color(255) ); //white
+      scroll.setStroke( false );
+      shape( scroll );
+    }
     //DISPLAY PREVIOUS TEXTS ----------------------------------------------------------------------------
     int currentTextHeight = textHeight; // stores the value of current textHeight that user was using
 
@@ -144,38 +198,55 @@ void draw() {
     frame++;
   }
 }
+
+
+int getTotalHeight() {
+   int totalHeight = 0;
+   for( int i = 0; i < compTexts.size(); i++ ) {
+     totalHeight += ((int)( textWidth(compTexts.get(i)) / 350 )+1) * 20;
+   }
+   totalHeight += compTexts.size() * 10;
+   for( int i = 0; i < userTexts.size(); i++ ) {
+     totalHeight += ((int)( textWidth(userTexts.get(i)) / 350 )+1) * 20;
+   }
+   totalHeight += userTexts.size() * 10;
+   return totalHeight;
+}
+
+
 int findKeyword(String statement, String goal, int startPos) {
-    String phrase = statement.trim();
-    // The only change to incorporate the startPos is in the line below
-    int psn = phrase.toLowerCase().indexOf(goal.toLowerCase(), startPos);
+  String phrase = statement.trim();
+  // The only change to incorporate the startPos is in the line below
+  int psn = phrase.toLowerCase().indexOf(goal.toLowerCase(), startPos);
 
-    // Refinement--make sure the goal isn't part of a word
-    while (psn >= 0) {
-      // Find the string of length 1 before and after the word
-      String before = " ", after = " ";
-      if (psn > 0) {
-        before = phrase.substring(psn - 1, psn).toLowerCase();
-      }
-
-      if (psn + goal.length() < phrase.length()) {
-        after = phrase.substring(
-        psn + goal.length(),
-        psn + goal.length() + 1).toLowerCase();
-      }
-
-      // If before and after aren't letters, we've found the word
-      if (((before.compareTo("a") < 0) || (before.compareTo("z") > 0))
-        && ((after.compareTo("a") < 0) || (after.compareTo("z") > 0))) {
-        return psn;
-      }
-
-      // The last position didn't work, so let's find
-      // the next, if there is one.
-      psn = phrase.indexOf(goal.toLowerCase(), psn + 1);
-
+  // Refinement--make sure the goal isn't part of a word
+  while (psn >= 0) {
+    // Find the string of length 1 before and after the word
+    String before = " ", after = " ";
+    if (psn > 0) {
+      before = phrase.substring(psn - 1, psn).toLowerCase();
     }
-    return -1;
+
+    if (psn + goal.length() < phrase.length()) {
+      after = phrase.substring(
+      psn + goal.length(),
+      psn + goal.length() + 1).toLowerCase();
+    }
+
+    // If before and after aren't letters, we've found the word
+    if (((before.compareTo("a") < 0) || (before.compareTo("z") > 0))
+      && ((after.compareTo("a") < 0) || (after.compareTo("z") > 0))) {
+      return psn;
+    }
+
+    // The last position didn't work, so let's find
+    // the next, if there is one.
+    psn = phrase.indexOf(goal.toLowerCase(), psn + 1);
+
   }
+  return -1;
+}
+
 
 void keyPressed() {
   if ( compTexting == true ) { //If computer is typing don't do anything
@@ -211,8 +282,6 @@ void keyPressed() {
           else if (findKeyword(text,"journal",0) >= 0) { 
             compText = "What's your mood?";  
           }
-        
-        
           else if (text.toLowerCase().equals("chat")) { 
             //here should be a list of randomly generated responses; (Use alstack, so things won't be repeated. pop (remove) 
             compText = "Hello, let's talk. Tell me something."; 
