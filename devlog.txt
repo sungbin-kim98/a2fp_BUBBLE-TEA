@@ -116,6 +116,23 @@ Features
 ==============================================================
 ==============================================================
 
+==============================================================
+==============================================================
+
+Date: 2016-06-10
+--------------------------------------------------------------
+
+User: Jennifer Yu
+Changes: Multiple files
+
+Features
+* Went to the dojo to figure out how to create multiple files
+* Too difficult, didn't work -- but relevant
+* Might find quick fix
+
+==============================================================
+==============================================================
+
 Date: 2016-06-10
 --------------------------------------------------------------
 
@@ -186,3 +203,27 @@ Problems:
 
 *Now have to connect the journal to the chatbox as well as transforming sentences and 
 adding a variety of responses to a stack. 
+
+==============================================================
+==============================================================
+
+Date: 2016-06-11
+--------------------------------------------------------------
+
+User: Jennifer Yu
+Changes: TesterWriterReader.pde, ideas.txt
+
+Features
+* Decided how to implement editing function
+* Mini test code to show how its done
+* Decided on some quick fixes and found some bugs listed in ideas.txt
+* Tested many methods for creating multiple files - decided to go with a quick fix
+
+Tomorrow's Work:
+3-5 Get editing to work.
+5-6 Multiple file quick fix.
+7-8 Bug fixing
+9-DEATH OTHER MODES, esp calendar
+
+==============================================================
+==============================================================
