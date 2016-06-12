@@ -159,8 +159,8 @@ int findKeyword(String statement, String goal, int startPos) {
 
       if (psn + goal.length() < phrase.length()) {
         after = phrase.substring(
-          psn + goal.length(),
-          psn + goal.length() + 1).toLowerCase();
+        psn + goal.length(),
+        psn + goal.length() + 1).toLowerCase();
       }
 
       // If before and after aren't letters, we've found the word
@@ -185,8 +185,56 @@ void keyPressed() {
         if( text.length() == 0 && lastLineText.length() == 0 ) {
         } // do nothing if user hasn't typed anything
         else {
+          text += lastLineText;
           userTextBoxes.add( textBox );
-          userTexts.add( text + lastLineText );
+          userTexts.add( text );
+          
+          //compText Manipulation -------------------------------------------------------------------------------------------------------------
+          if (findKeyword(text.toLowerCase(), "my name is", 0) >= 0) { 
+            String changeLLT = text.trim(); 
+            int psn = findKeyword(text.toLowerCase(), "my name is", 0); 
+            changeLLT = text.substring(psn+10).trim(); 
+            compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry."; 
+          }
+          else if (findKeyword(text.toLowerCase(), "i am", 0) >= 0) { 
+            String changeLLT = text.trim(); 
+            int psn = findKeyword(text.toLowerCase(), "i am", 0); 
+              changeLLT = text.substring(psn+4).trim(); 
+              compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry.";
+          }
+          //not sure why when you just type it the name. It only saves the first letter?
+          else if (findKeyword(compText, "Hey", 0) >= 0) {
+            String changeLLT = text.trim();
+            compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry.";
+          }
+          //OKAY IDK WHY IT SKIPS OVER TO THE LAST LINE :OESKGLKG 
+          else if (findKeyword(text,"journal",0) >= 0) { 
+            compText = "What's your mood?";  
+          }
+        
+        
+          else if (text.toLowerCase().equals("chat")) { 
+            //here should be a list of randomly generated responses; (Use alstack, so things won't be repeated. pop (remove) 
+            compText = "Hello, let's talk. Tell me something."; 
+          }
+          else if (findKeyword(compText,"What's your mood?",0) >= 0) { 
+            compText = "Hmm, okay. Something that made you happy?"; 
+          }
+          else if (findKeyword(compText,"remember?", 0) >= 0) { 
+            compText = "There! You're done. What do you want to do now? More journal or check out your..";
+          }
+          else if (findKeyword(compText,"happy",0) >= 0) {
+            compText = "Good, remember that. Anything else you want to remember?"; 
+          }
+          else if ((lastLineText.length() == 1) && (lastLineText.equals(" "))) { 
+            compText = "Say something. Don't be boring";
+          }
+          else if (findKeyword(text, "no" , 0) >= 0) {
+            compText = "Why so negative?";
+          }
+          //else { compText = "Uhhh.. type journal or chat....ITS NOT THAT HARD."; }
+          //------------------------------------------------------------------------------------------------------------------------------------    
+          //reset variables
           text = "";
           lastLineText = "";
           textHeight = 0;
@@ -263,58 +311,6 @@ void keyPressed() {
       }  
       
       lastLineText += key; //update txt
-        
-      if (findKeyword(lastLineText.toLowerCase(), "my name is", 0) >= 0) { 
-          String changeLLT = lastLineText.trim(); 
-          int psn = findKeyword(lastLineText.toLowerCase(), "my name is", 0); 
-          changeLLT = lastLineText.substring(psn+10).trim(); 
-          compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry."; 
-      }
-      else if (findKeyword(lastLineText.toLowerCase(), "i am", 0) >= 0) { 
-        String changeLLT = lastLineText.trim(); 
-        int psn = findKeyword(lastLineText.toLowerCase(), "i am", 0); 
-          changeLLT = lastLineText.substring(psn+4).trim(); 
-          compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry.";
-      }
-    
-      //not sure why when you just type it the name. It only saves the first letter?
-      else if (findKeyword(compText, "Hey", 0) >= 0) {
-        String changeLLT = lastLineText.trim();
-        compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry.";
-      }
-      //OKAY IDK WHY IT SKIPS OVER TO THE LAST LINE :OESKGLKG 
-      else if (findKeyword(lastLineText,"journal",0) >= 0) { 
-      compText = "What's your mood?";  
-      }
-    
-    
-      else if (lastLineText.toLowerCase().equals("chat")) { 
-        //here should be a list of randomly generated responses; (Use alstack, so things won't be repeated. pop (remove) 
-        compText = "Hello, let's talk. Tell me something."; 
-      }
-      
-      else if (findKeyword(compText,"What's your mood?",0) >= 0) { 
-        compText = "Hmm, okay. Something that made you happy?";
-        
-      }
-      
-       else if (findKeyword(compText,"remember?", 0) >= 0) { 
-        compText = "There! You're done. What do you want to do now? More journal or check out your..";
-      }
-      
-     else if (findKeyword(compText,"happy",0) >= 0) {
-        compText = "Good, remember that. Anything else you want to remember?"; 
-       
-      }
-      
-      else if ((lastLineText.length() == 1) && (lastLineText.equals(" "))) { 
-        compText = "Say something. Don't be boring";
-      }
-      
-      else if (findKeyword(lastLineText, "no" , 0) >= 0) {
-        compText = "Why so negative?";
-    }
-  //   else { compText = "Uhhh.. type journal or chat....ITS NOT THAT HARD."; }
     }
   }
 }
