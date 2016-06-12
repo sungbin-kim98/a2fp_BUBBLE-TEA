@@ -1,6 +1,6 @@
 PrintWriter journal;
-
 int frame = 0;
+int count = 0; 
 int textHeight = 0; //for even vertical spacing out between text boxes
 int beg = 0;
 String lastLineText = ""; // only for user
@@ -247,6 +247,19 @@ int findKeyword(String statement, String goal, int startPos) {
   return -1;
 }
 
+boolean fileExists(String path) {
+  File file=new File(dataPath(path));
+  println(file.getName());
+  boolean exists = file.exists();
+  if (exists) {
+    println("true");
+    return true;
+  }
+  else {
+    println("false");
+    return false;
+  }
+} 
 
 void keyPressed() {
   if ( compTexting == true ) { //If computer is typing don't do anything
@@ -273,18 +286,19 @@ void keyPressed() {
               changeLLT = text.substring(psn+4).trim(); 
               compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry.";
           }
-          //not sure why when you just type it the name. It only saves the first letter?
+         
           else if (findKeyword(compText, "Hey", 0) >= 0) {
             String changeLLT = text.trim();
             compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry.";
+          } 
+          
+          else if ((findKeyword(text.toLowerCase(),"journal",0) >= 0) && (count > 0)){
+            compText = "You're now in journal mode! Write an entry and click ESC to return to shellmode and your entry will be saved."; 
           }
-          //OKAY IDK WHY IT SKIPS OVER TO THE LAST LINE :OESKGLKG 
-          else if (findKeyword(text,"journal",0) >= 0) { 
+          
+          else if (findKeyword(text.toLowerCase(),"journal",0) >= 0) { 
             compText = "What's your mood?";  
-          }
-          else if (text.toLowerCase().equals("chat")) { 
-            //here should be a list of randomly generated responses; (Use alstack, so things won't be repeated. pop (remove) 
-            compText = "Hello, let's talk. Tell me something."; 
+            count++;
           }
           else if (findKeyword(compText,"What's your mood?",0) >= 0) { 
             compText = "Hmm, okay. Something that made you happy?"; 
@@ -295,13 +309,14 @@ void keyPressed() {
           else if (findKeyword(compText,"happy",0) >= 0) {
             compText = "Good, remember that. Anything else you want to remember?"; 
           }
+          
           else if ((lastLineText.length() == 1) && (lastLineText.equals(" "))) { 
             compText = "Say something. Don't be boring";
           }
           else if (findKeyword(text, "no" , 0) >= 0) {
             compText = "Why so negative?";
           }
-          //else { compText = "Uhhh.. type journal or chat....ITS NOT THAT HARD."; }
+          else { compText = "Command does not exist. Type a valid command. journal to go to write a journal"; }
           //------------------------------------------------------------------------------------------------------------------------------------    
           //reset variables
           text = "";
