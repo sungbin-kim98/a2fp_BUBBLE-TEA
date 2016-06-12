@@ -30,7 +30,6 @@ void setup() {
 
 
 void draw() {
-
   if ( compTexting == true ) {
     if ( beg < compText.length() ) {
       background( 255 );
@@ -276,28 +275,34 @@ void keyPressed() {
         String changeLLT = lastLineText.trim(); 
         int psn = findKeyword(lastLineText.toLowerCase(), "i am", 0); 
           changeLLT = lastLineText.substring(psn+4).trim(); 
-          compText = "Hi " + changeLLT + ". This is also a place you can let all yo feelings out. If you would like to enter a journal entry now, type journal. Once you're done, click ESC and it'll be saved! Don't want to write a journal? Just have a chat with me. Type chat."; }      
+          compText = "Hi " + changeLLT + ". This is also a place you can let all yo feelings out. If you would like to enter a journal entry now, type journal. Once you're done, click ESC and it'll be saved! Don't want to write a journal? Just have a chat with me. Type chat."; 
+        }      
     
       //not sure why when you just type it the name. It only saves the first letter?
       else if (findKeyword(compText, "Welcome", 0) >= 0) {
         String changeLLT = lastLineText.trim();
         compText = "Hi " + changeLLT + ". This is also a place you can let all yo feelings out. If you would like to enter a journal entry now, type journal. Once you're done, click ESC and it'll be saved! Don't want to write a journal? Just have a chat with me. Type chat.";
       }
+      
       else if (lastLineText.toLowerCase().equals("journal")) { 
       compText = "Here's your journal. Talk about your mood, what you did today, how was your day, what'd you eat? Anything really."; 
       }
+      
       else if (lastLineText.toLowerCase().equals("chat")) { 
         //here should be a list of randomly generated responses; (Use alstack, so things won't be repeated. pop (remove) 
         compText = "Hello, let's talk. Tell me something."; 
       }
+      
       else if ((lastLineText.length() == 1) && (lastLineText.equals(" "))) { 
         compText = "Say something. Don't be boring";
       }
+      
       else if (findKeyword(lastLineText, "no" , 0) >= 0) {
         compText = "Why so negative?";
     }
-     else { compText = "Uhhh.. type journal or chat....ITS NOT THAT HARD."; 
+  //   else { compText = "Uhhh.. type journal or chat....ITS NOT THAT HARD."; }
     }
   }
 }
-  }
+  
+  
