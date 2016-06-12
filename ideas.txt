@@ -1,0 +1,32 @@
+FIXES
+add What's your name?
+
+name insertion issues only returns one character
+
+speed up chat with arrow key? lowers delay?
+
+temp fix
+what journal entry are you up to? input and saves
+
+to edit free journal you need to go to text file to edit? because its mad long and retyping it would suck
+
+
+
+
+EDITING
+Mood:
+Something that made you happy:
+etc.
+etc.
+etc.
+
+temp readline saves old response
+
+"if you finish editing early, press [key] to exit. your old responses that aren't edited will remain"
+
+old responses will be returned with a loop that adds readlines to data
+
+chatbot says "Your mood yesterday was ___old response___. If you don't want to change this, leave blank. If you do, type your corrections."
+
+if blank then save old readline (temp) into data (with \n?)
+if not, save new input into data normally
