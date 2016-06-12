@@ -225,5 +225,15 @@ Tomorrow's Work:
 7-8 Bug fixing
 9-DEATH OTHER MODES, esp calendar
 
+
 ==============================================================
 ==============================================================
+
+Date: 2016 - 06 - 12
+User : Mei Huang 
+
+Things to fix: The prompts that leads to the journal: Right now, all the else-if statements 
+are traversed, but it only prints the last line, assuming it gets overwritten each time 
+when it's true. 
+-- still want to save the answers to the bunch of leading questions to the first journal. 
+

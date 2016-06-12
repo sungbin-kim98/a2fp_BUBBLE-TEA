@@ -5,7 +5,7 @@ int textHeight = 0; //for even vertical spacing out between text boxes
 int beg = 0;
 String lastLineText = ""; // only for user
 String text = ""; //storage of txt that will be transmitted to the system.
-String compText = "Welcome to Turtle Shell! This is an interactive chatbox. For now let's introduce ourselves. My name is Jane."; //computer's response
+String compText = "Hey there, my name is Jane. What's yours? "; //computer's response
 Boolean compTexting = true;
 Boolean shellMode = true;
 PFont font, bfont;
@@ -268,29 +268,43 @@ void keyPressed() {
           String changeLLT = lastLineText.trim(); 
           int psn = findKeyword(lastLineText.toLowerCase(), "my name is", 0); 
           changeLLT = lastLineText.substring(psn+10).trim(); 
-          compText = "Hi " + changeLLT + ". This is also a place you can let all yo feelings out. If you would like to enter a journal entry now, type journal. Once you're done, click ESC and it'll be saved! Don't want to write a journal? Just have a chat with me. Type chat.";
+          compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry."; 
       }
-       
       else if (findKeyword(lastLineText.toLowerCase(), "i am", 0) >= 0) { 
         String changeLLT = lastLineText.trim(); 
         int psn = findKeyword(lastLineText.toLowerCase(), "i am", 0); 
           changeLLT = lastLineText.substring(psn+4).trim(); 
-          compText = "Hi " + changeLLT + ". This is also a place you can let all yo feelings out. If you would like to enter a journal entry now, type journal. Once you're done, click ESC and it'll be saved! Don't want to write a journal? Just have a chat with me. Type chat."; 
-        }      
+          compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry.";
+      }
     
       //not sure why when you just type it the name. It only saves the first letter?
-      else if (findKeyword(compText, "Welcome", 0) >= 0) {
+      else if (findKeyword(compText, "Hey", 0) >= 0) {
         String changeLLT = lastLineText.trim();
-        compText = "Hi " + changeLLT + ". This is also a place you can let all yo feelings out. If you would like to enter a journal entry now, type journal. Once you're done, click ESC and it'll be saved! Don't want to write a journal? Just have a chat with me. Type chat.";
+        compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry.";
       }
-      
-      else if (lastLineText.toLowerCase().equals("journal")) { 
-      compText = "Here's your journal. Talk about your mood, what you did today, how was your day, what'd you eat? Anything really."; 
+      //OKAY IDK WHY IT SKIPS OVER TO THE LAST LINE :OESKGLKG 
+      else if (findKeyword(lastLineText,"journal",0) >= 0) { 
+      compText = "What's your mood?";  
       }
-      
+    
+    
       else if (lastLineText.toLowerCase().equals("chat")) { 
         //here should be a list of randomly generated responses; (Use alstack, so things won't be repeated. pop (remove) 
         compText = "Hello, let's talk. Tell me something."; 
+      }
+      
+      else if (findKeyword(compText,"What's your mood?",0) >= 0) { 
+        compText = "Hmm, okay. Something that made you happy?";
+        
+      }
+      
+       else if (findKeyword(compText,"remember?", 0) >= 0) { 
+        compText = "There! You're done. What do you want to do now? More journal or check out your..";
+      }
+      
+     else if (findKeyword(compText,"happy",0) >= 0) {
+        compText = "Good, remember that. Anything else you want to remember?"; 
+       
       }
       
       else if ((lastLineText.length() == 1) && (lastLineText.equals(" "))) { 
@@ -304,5 +318,6 @@ void keyPressed() {
     }
   }
 }
+
   
   
