@@ -341,17 +341,17 @@ void keyPressed() {
             count++;
           } 
           else if (findKeyword(compText, "What's today's date?", 0) >= 0) { 
-            compText = "What's your mood?"; 
+            compText = "What's your mood today? Ex. happy, sad, mad.."; 
             journal.println(userTexts.get(userTexts.size()-1));
             journal.flush(); // Writes the remaining data to the file
           }
-         else if (findKeyword(compText, "What's your mood?", 0) >= 0) { 
-            compText = "Hmm, okay. What is something that made you happy today?"; 
+         else if (findKeyword(compText, "What's your mood today?", 0) >= 0) { 
+            compText = "Hmm, okay. What is something that made you " + (userTexts.get(userTexts.size()-1)) + " today?"; 
             journal.println(userTexts.get(userTexts.size()-1));
             journal.flush(); // Writes the remaining data to the file
           } 
-          else if (findKeyword(compText, "happy", 0) >= 0) {
-            compText = "Good, remember that. Anything else you want to remember?"; 
+          else if (findKeyword(compText, "Hmm, okay.", 0) >= 0) {
+            compText = "Alright. Anything else you want to remember?"; 
             journal.println(userTexts.get(userTexts.size()-1));   
             journal.flush(); // Writes the remaining data to the file
           } 
