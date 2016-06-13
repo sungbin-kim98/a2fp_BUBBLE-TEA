@@ -387,6 +387,7 @@ void keyPressed() {
         text += lastLineText;
         lastLineText = "";
       }
+    }
     else if ( key == BACKSPACE || key == DELETE ) {
       if ( text.length() <= 0 && lastLineText.length() <= 0 ) { // do nothing
       } else if ( lastLineText.length() <= 0 ) {
@@ -414,7 +415,7 @@ void keyPressed() {
         journal.flush(); // Writes the remaining data to the file
         journal.close(); // Finishes the file
         exit(); // Stops the program
-       }
+       
     } else if ( key == CODED ) { // do nothing
     } else {
       if ( textWidth( lastLineText + key ) > 350 ) { //to prevent cursor misplacement
