@@ -38,41 +38,41 @@ void setup() {
 
 
 void draw() {
+  pushMatrix();
+  background( 255 );
+  //Scrollbar ----------------------------------------------------------------------------------
+  if( getTotalHeight() > 580 ) {
+    scrollBarOn = true;
+  }
+  
+  if( scrollBarOn == true ) {
+    scrollBar = createShape( GROUP );
+    leftArc = createShape( ARC, 800, 10, 20, 20, PI, 2 * PI );
+    box = createShape( RECT, 800, 20, 20, 560 );
+    rightArc = createShape( ARC, 800, 570, 20, 20, 0, PI );
+    scrollBar.addChild( leftArc );
+    scrollBar.addChild( box );
+    scrollBar.addChild( rightArc );
+    leftArc.setFill( color(150, 220, 250) );
+    rightArc.setFill( color(150, 220, 250) );
+    box.setFill( color(150, 220, 250) );
+    leftArc.setStroke( color(150, 220, 250) );
+    rightArc.setStroke( color(150, 220, 250) );
+    box.setStroke( color(150, 220, 250) );
+    strokeWeight(5);
+    shape( scrollBar );
+    
+    float ratio = getTotalHeight() / 560;
+    if( mouseX > 770 && mouseX < 830 && mousePressed ) {
+      scrollPos = constrain( mouseY, 10, 570 );
+    }
+    float movement = (10 - scrollPos) * ratio;
+    translate( 0, movement );
+  }
   if ( compTexting == true ) {// -----------------------------------------------------------------------------COMPUTER
     if ( beg < compText.length() ) {
-      background( 255 );
-      pushMatrix();
       beg++;
       delay(15);
-      //Scrollbar ----------------------------------------------------------------------------------
-      if( getTotalHeight() > 580 ) {
-        scrollBarOn = true;
-      }
-      
-      if( scrollBarOn == true ) {
-        scrollBar = createShape( GROUP );
-        leftArc = createShape( ARC, 800, 10, 20, 20, PI, 2 * PI );
-        box = createShape( RECT, 800, 20, 20, 560 );
-        rightArc = createShape( ARC, 800, 570, 20, 20, 0, PI );
-        scrollBar.addChild( leftArc );
-        scrollBar.addChild( box );
-        scrollBar.addChild( rightArc );
-        leftArc.setFill( color(150, 220, 250) );
-        rightArc.setFill( color(150, 220, 250) );
-        box.setFill( color(150, 220, 250) );
-        leftArc.setStroke( color(150, 220, 250) );
-        rightArc.setStroke( color(150, 220, 250) );
-        box.setStroke( color(150, 220, 250) );
-        strokeWeight(5);
-        shape( scrollBar );
-        
-        float ratio = getTotalHeight() / 560;
-        if( mouseX > 770 && mouseX < 830 && mousePressed ) {
-          scrollPos = constrain( mouseY, 10, 570 );
-        }
-        float movement = (10 - scrollPos) * ratio;
-        translate( 0, movement );
-      }
       //DISPLAY PREVIOUS TEXTS ---------------------------------------------------------------------
       int currentTextHeight = textHeight; // stores the value of current textHeight that comp was using
   
@@ -130,38 +130,7 @@ void draw() {
       text = "";
       compTexting = false;
     }
-  } else { //----------------------------------------------------------------------------------------------USER\
-    pushMatrix();
-    background( 255 );
-    //Scrollbar ----------------------------------------------------------------------------------
-    if( getTotalHeight() > 580 ) {
-      scrollBarOn = true;
-    }
-    
-    if( scrollBarOn == true ) {
-      scrollBar = createShape( GROUP );
-      leftArc = createShape( ARC, 800, 10, 20, 20, PI, 2 * PI );
-      box = createShape( RECT, 800, 20, 20, 560 );
-      rightArc = createShape( ARC, 800, 570, 20, 20, 0, PI );
-      scrollBar.addChild( leftArc );
-      scrollBar.addChild( box );
-      scrollBar.addChild( rightArc );
-      leftArc.setFill( color(150, 220, 250) );
-      rightArc.setFill( color(150, 220, 250) );
-      box.setFill( color(150, 220, 250) );
-      leftArc.setStroke( color(150, 220, 250) );
-      rightArc.setStroke( color(150, 220, 250) );
-      box.setStroke( color(150, 220, 250) );
-      strokeWeight(5);
-      shape( scrollBar );
-   
-      float ratio = getTotalHeight() / 560; 
-      if( mouseX > 770 && mouseX < 830 && mousePressed ) {
-        scrollPos = constrain( mouseY, 10, 570 );
-      }
-      float movement = (10 - scrollPos) * ratio;
-      translate( 0, movement );
-    }
+  } else { //----------------------------------------------------------------------------------------------USER
     //DISPLAY PREVIOUS TEXTS ----------------------------------------------------------------------------
     int currentTextHeight = textHeight; // stores the value of current textHeight that user was using
 
