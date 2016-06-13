@@ -313,12 +313,12 @@ void keyPressed() {
             compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries and access old journal entries. Type 'journal' to write an entry or type 'access' to access old entries.";
           } 
           
-          else if ((((findKeyword(compText,"There! You're done.",0)) >= 0) || ((findKeyword(compText,"Here's the fun stuff.",0)) >= 0)) && (findKeyword(userTexts.get(userTexts.size()-1),"journal",0) >= 0)) { 
+          else if ( ( ((findKeyword(compText,"What would you like to do next?",0) >= 0) || (findKeyword(compText,"There! You're done.",0) >= 0)) || (findKeyword(compText,"Here's the fun stuff.",0) >= 0)) && (findKeyword(userTexts.get(userTexts.size()-1),"journal",0) >= 0)) { 
             compText = "What entry are you up to? You can check your folder."; 
         }
         
-         else if ((((findKeyword(compText,"There! You're done.",0)) >= 0) || ((findKeyword(compText,"Here's the fun stuff.",0)) >= 0)) && (findKeyword(userTexts.get(userTexts.size()-1),"access",0) >= 0)) { 
-            compText = "What is the filename of the entry you would like to access? (Ex. journalentry.txt)"; 
+         else if ( ( ((findKeyword(compText,"What would you like to do next?",0) >= 0) || (findKeyword(compText,"There! You're done.",0) >= 0)) || (findKeyword(compText,"Here's the fun stuff.",0) >= 0)) && (findKeyword(userTexts.get(userTexts.size()-1),"access",0) >= 0)) { 
+            compText = "What is the filename of the entry you would like to access?"; 
         }
         
          else if ((findKeyword(compText,"What is the filename of the entry you would like to access?",0)) >= 0) {
