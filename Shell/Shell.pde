@@ -4,6 +4,8 @@ int frame = 0;
 int count = 0; 
 int textHeight = 0; //for even vertical spacing out between text boxes
 int beg = 0;
+int storePoint = 0;
+String day = "";
 String lastLineText = ""; // only for user
 String text = ""; //storage of txt that will be transmitted to the system.
 String compText = "Hey there, my name is Jane. What's yours? "; //computer's response
@@ -27,7 +29,6 @@ void setup() {
   textFont( font, 20 ); //font, size( overrides the default size above )
   textLeading( 20 ); //gap between lines
   //-----------------------------------------------------------------------------
-  journal = createWriter("journalentry.txt"); // Create a new file in the sketch directory
 }
 
 
@@ -282,6 +283,7 @@ boolean fileExists(String path) {
 } 
 
 
+
 void keyPressed() {
   if ( compTexting == true ) { //If computer is typing don't do anything
   } else {
@@ -299,36 +301,57 @@ void keyPressed() {
             String changeLLT = text.trim(); 
             int psn = findKeyword(text.toLowerCase(), "my name is", 0); 
             changeLLT = text.substring(psn+10).trim(); 
-            compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry."; 
+            compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type 'journal' to write an entry."; 
           }
           else if (findKeyword(text.toLowerCase(), "i am", 0) >= 0) { 
             String changeLLT = text.trim(); 
             int psn = findKeyword(text.toLowerCase(), "i am", 0); 
-              changeLLT = text.substring(psn+4).trim(); 
-              compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry.";
-          }
+            changeLLT = text.substring(psn+4).trim(); 
+            compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type 'journal' to write an entry.";
+        }
          
           else if (findKeyword(compText, "Hey", 0) >= 0) {
             String changeLLT = text.trim();
-            compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type journal to write an entry.";
+            compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type 'journal' to write an entry.";
           } 
           
+          else if (findKeyword(compText,"journal",0) >= 0) { 
+            compText = "What entry are you up to? You can check your folder."; 
+        }
+        
           else if ((findKeyword(text.toLowerCase(),"journal",0) >= 0) && (count > 0)){
             compText = "You're now in journal mode! Write an entry and click ESC to return to shellmode and your entry will be saved."; 
+        }
+          
+          else if (findKeyword(compText,"You can check your folder.",0) >= 0) { 
+            day = userTexts.get(compTexts.size()-1);
+            compText = "Are you sure you're up to entry" + day + "?  Type Yes or No."; 
+          }          
+          
+          else if (findKeyword(userTexts.get(userTexts.size()-1),"No",0) >= 0) { 
+            compText = "What entry are you up to? You can check your folder."; 
+          }
+
+          else if (findKeyword(userTexts.get(userTexts.size()-1),"Yes",0) >= 0) { 
+            compText = "What's today's date?";  
+            count++;
+            storePoint = compTexts.size();
           }
           
-          else if (findKeyword(text.toLowerCase(),"journal",0) >= 0) { 
-            compText = "What's your mood?";  
-            count++;
+          else if (findKeyword(compText,"What's today's date?",0) >= 0) { 
+            compText = "What's your mood?"; 
           }
+          
           else if (findKeyword(compText,"What's your mood?",0) >= 0) { 
-            compText = "Hmm, okay. Something that made you happy?"; 
+            compText = "Hmm, okay. Something that made you happy today?"; 
           }
-          else if (findKeyword(compText,"remember?", 0) >= 0) { 
-            compText = "There! You're done. What do you want to do now? More journal or check out your..";
-          }
+
           else if (findKeyword(compText,"happy",0) >= 0) {
             compText = "Good, remember that. Anything else you want to remember?"; 
+          }
+          
+          else if (findKeyword(compText,"remember?", 0) >= 0) { 
+            compText = "There! You're done. What do you want to do now? More journal or check out your..";
           }
           
           else if ((lastLineText.length() == 1) && (lastLineText.equals(" "))) { 
@@ -364,7 +387,7 @@ void keyPressed() {
         text += lastLineText;
         lastLineText = "";
       }
-    } else if ( key == BACKSPACE || key == DELETE ) {
+    else if ( key == BACKSPACE || key == DELETE ) {
       if ( text.length() <= 0 && lastLineText.length() <= 0 ) { // do nothing
       } else if ( lastLineText.length() <= 0 ) {
         textHeight--;
@@ -384,16 +407,14 @@ void keyPressed() {
       }
        } 
        else if (key == ESC) { 
-      while (text.indexOf("|") >= 0) {
-        String data2 = text.substring(0, text.indexOf("|"));
-        journal.println(data2.trim());
-        text = text.substring(text.indexOf("|")+1);
-      }
-      journal.println(text);
-      journal.println(lastLineText);
-      journal.flush(); // Writes the remaining data to the file
-      journal.close(); // Finishes the file
-      exit(); // Stops the program
+        journal = createWriter("journalentry" + day + ".txt"); // Create a new file in the sketch directory
+        for (int x = storePoint; x < userTexts.size(); x++) {
+          journal.println(userTexts.get(x));
+        }
+        journal.flush(); // Writes the remaining data to the file
+        journal.close(); // Finishes the file
+        exit(); // Stops the program
+       }
     } else if ( key == CODED ) { // do nothing
     } else {
       if ( textWidth( lastLineText + key ) > 350 ) { //to prevent cursor misplacement
@@ -419,6 +440,3 @@ void keyPressed() {
     }
   }
 }
-
-  
-  
