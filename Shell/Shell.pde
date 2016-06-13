@@ -1,4 +1,5 @@
 PrintWriter journal;
+float scrollPos = 10;
 int frame = 0;
 int count = 0; 
 int textHeight = 0; //for even vertical spacing out between text boxes
@@ -34,13 +35,14 @@ void draw() {
   if ( compTexting == true ) {// -----------------------------------------------------------------------------COMPUTER
     if ( beg < compText.length() ) {
       background( 255 );
+      pushMatrix();
       beg++;
       delay(15);
       //Scrollbar ----------------------------------------------------------------------------------
-      println( getTotalHeight() );
       if( getTotalHeight() > 580 ) {
         scrollBarOn = true;
       }
+      
       if( scrollBarOn == true ) {
         scrollBar = createShape( GROUP );
         leftArc = createShape( ARC, 800, 10, 20, 20, PI, 2 * PI );
@@ -58,10 +60,12 @@ void draw() {
         strokeWeight(5);
         shape( scrollBar );
         
-        scroll = createShape( ELLIPSE, 800, 10, 20, 20 );
-        scroll.setFill( color(255) ); //white
-        scroll.setStroke( false );
-        shape( scroll );
+        float ratio = getTotalHeight() / 560;
+        if( mouseX > 770 && mouseX < 830 && mousePressed ) {
+          scrollPos = constrain( mouseY, 10, 570 );
+        }
+        float movement = (10 - scrollPos) * ratio;
+        translate( 0, movement );
       }
       //DISPLAY PREVIOUS TEXTS ---------------------------------------------------------------------
       int currentTextHeight = textHeight; // stores the value of current textHeight that comp was using
@@ -105,6 +109,12 @@ void draw() {
       text = compText.substring(0, beg);
       textHeight = (int)(textWidth( text ) / 350);
       text( text, 420, 20, 350, 600 ); //display computer's compText
+      //Scroll------------------------------------------------------------------------------------- Scroll is here because we have to reset the coordinates before displaying it
+      popMatrix();
+      scroll = createShape( ELLIPSE, 800, scrollPos, 20, 20 );
+      scroll.setFill( color(255) ); //white
+      scroll.setStroke( false );
+      shape( scroll );
     } else {
       compTextBoxes.add( textBox );
       compTexts.add( text );
@@ -114,13 +124,14 @@ void draw() {
       text = "";
       compTexting = false;
     }
-  } else { //----------------------------------------------------------------------------------------------USER
+  } else { //----------------------------------------------------------------------------------------------USER\
+    pushMatrix();
     background( 255 );
     //Scrollbar ----------------------------------------------------------------------------------
-    println( getTotalHeight() );
     if( getTotalHeight() > 580 ) {
       scrollBarOn = true;
     }
+    
     if( scrollBarOn == true ) {
       scrollBar = createShape( GROUP );
       leftArc = createShape( ARC, 800, 10, 20, 20, PI, 2 * PI );
@@ -137,11 +148,13 @@ void draw() {
       box.setStroke( color(150, 220, 250) );
       strokeWeight(5);
       shape( scrollBar );
-      
-      scroll = createShape( ELLIPSE, 800, 10, 20, 20 );
-      scroll.setFill( color(255) ); //white
-      scroll.setStroke( false );
-      shape( scroll );
+   
+      float ratio = getTotalHeight() / 560; 
+      if( mouseX > 770 && mouseX < 830 && mousePressed ) {
+        scrollPos = constrain( mouseY, 10, 570 );
+      }
+      float movement = (10 - scrollPos) * ratio;
+      translate( 0, movement );
     }
     //DISPLAY PREVIOUS TEXTS ----------------------------------------------------------------------------
     int currentTextHeight = textHeight; // stores the value of current textHeight that user was using
@@ -195,6 +208,12 @@ void draw() {
     //DISPLAY CURRENT USER TEXT---------------------------------------------------------------------------
     text( text, 30, 20, 350, 600 );
     text( lastLineText, 30, textHeight * 20 + 20, 350, 600 ); //display text within a box
+    //Scroll----------------------------------------------------------------------------------------------
+    popMatrix(); //reset the original coordinates so that scrollBar and scroll are not affected by translation
+    scroll = createShape( ELLIPSE, 800, scrollPos, 20, 20 );
+    scroll.setFill( color(255) ); //white
+    scroll.setStroke( false );
+    shape( scroll );
     frame++;
   }
 }
@@ -247,6 +266,7 @@ int findKeyword(String statement, String goal, int startPos) {
   return -1;
 }
 
+
 boolean fileExists(String path) {
   File file=new File(dataPath(path));
   println(file.getName());
@@ -260,6 +280,7 @@ boolean fileExists(String path) {
     return false;
   }
 } 
+
 
 void keyPressed() {
   if ( compTexting == true ) { //If computer is typing don't do anything
