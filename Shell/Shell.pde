@@ -282,11 +282,11 @@ void keyPressed() {
             compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries and access old journal entries. Type 'journal' to write an entry or type 'access' to access old entries.";
           } 
           
-          else if ( ( ((findKeyword(compText,"What would you like to do next?",0) >= 0) || (findKeyword(compText,"There! You're done.",0) >= 0)) || (findKeyword(compText,"Here's the fun stuff.",0) >= 0)) && (findKeyword(userTexts.get(userTexts.size()-1),"journal",0) >= 0)) { 
+          else if ( ( ((findKeyword(compText,"What would you like to do next?",0) >= 0) || (findKeyword(compText,"There! You're done.",0) >= 0)) || (findKeyword(compText,"Here's the fun stuff",0) >= 0) || (findKeyword(compText,"Command does not exist.",0) >= 0)) && (findKeyword(userTexts.get(userTexts.size()-1),"journal",0) >= 0)) { 
             compText = "What entry are you up to? You can check your folder."; 
         }
         
-         else if ( ( ((findKeyword(compText,"What would you like to do next?",0) >= 0) || (findKeyword(compText,"There! You're done.",0) >= 0)) || (findKeyword(compText,"Here's the fun stuff.",0) >= 0)) && (findKeyword(userTexts.get(userTexts.size()-1),"access",0) >= 0)) { 
+         else if ( ( ((findKeyword(compText,"What would you like to do next?",0) >= 0) || (findKeyword(compText,"There! You're done.",0) >= 0)) || (findKeyword(compText,"Here's the fun stuff",0) >= 0) || (findKeyword(compText,"Command does not exist.",0) >= 0)) && (findKeyword(userTexts.get(userTexts.size()-1),"access",0) >= 0)) { 
             compText = "What is the filename of the entry you would like to access?"; 
         }
         
@@ -306,7 +306,7 @@ void keyPressed() {
           } catch (Exception e) {
             compText = "Hmm, there seems to be a problem trying to access that entry.  ";
             }
-            compText += "What would you like to do next? Type 'journal' to write an entry or type 'access' to access old entries or leave with ESC.";
+            compText += "What would you like to do next? Write another entry (type journal), access an entry (type access) or exit for today (ESC).";
         }        
         
         /**
@@ -371,7 +371,7 @@ void keyPressed() {
           else if (findKeyword(text, "no" , 0) >= 0) {
             compText = "Why so negative?";
           }
-          else { compText = "Command does not exist. Type a valid command. journal to go to write a journal"; }
+          else { compText = "Command does not exist. Type a valid command. Write another entry (type journal), access an entry (type access) or exit for today (ESC)."; }
           //------------------------------------------------------------------------------------------------------------------------------------    
           //reset variables
           text = "";
