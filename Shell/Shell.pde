@@ -328,11 +328,11 @@ void keyPressed() {
           }          
           }
           
-          else if (findKeyword(userTexts.get(userTexts.size()-1),"No",0) >= 0) { 
+          else if ((findKeyword(compText,"Are you sure you're up to entry",0) >= 0) && (findKeyword(userTexts.get(userTexts.size()-1),"No",0) >= 0)) { 
             compText = "What entry are you up to? You can check your folder."; 
           }
 
-          else if (findKeyword(userTexts.get(userTexts.size()-1),"Yes",0) >= 0) { 
+          else if ((findKeyword(compText,"Are you sure you're up to entry",0) >= 0) && (findKeyword(userTexts.get(userTexts.size()-1),"Yes",0) >= 0)) { 
             journal = createWriter("journalentry" + day + ".txt"); // Create a new file in the sketch directory
             compText = "What's today's date?";  
             count++;
@@ -357,7 +357,7 @@ void keyPressed() {
           }
           
           else if (findKeyword(compText,"remember?", 0) >= 0) { 
-            compText = "There! You're done. What do you want to do now? More journal or check out your..";
+            compText = "There! You're done. What do you want to do now? Write another entry (type journal) or leave (ESC)..";
             journal.println(userTexts.get(userTexts.size()-1));      
             journal.flush(); // Writes the remaining data to the file
         }
