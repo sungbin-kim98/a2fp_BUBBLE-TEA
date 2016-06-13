@@ -36,6 +36,7 @@ void setup() {
   textFont( font, 20 ); //font, size( overrides the default size above )
   textLeading( 20 ); //gap between lines
   //-----------------------------------------------------------------------------
+  frameRate( 20 );
 }
 
 
@@ -299,7 +300,11 @@ void keyPressed() {
                   }
                 } else {
                   String tmp = reader.readLine();
-                  while ( textWidth( tmp ) < 350 ) {
+                  int tmpHeight = 1;
+                  if( textWidth( tmp ) > 350 ) {
+                    tmpHeight = (int)( textWidth( tmp ) / 350 ) + 1;
+                  }
+                  while ( textWidth( tmp ) < ( 350 * tmpHeight ) ) {
                     tmp += " ";
                   }
                   compText += tmp;
