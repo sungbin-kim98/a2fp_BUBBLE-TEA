@@ -1,11 +1,15 @@
 PrintWriter journal;
+BufferedReader reader;
 float scrollPos = 10;
 int frame = 0;
 int count = 0; 
 int textHeight = 0; //for even vertical spacing out between text boxes
 int beg = 0;
+String lines = "";
+String temp = "";
 String day = "";
 String lastLineText = ""; // only for user
+String temp1, temp2, temp3, temp4, temp5;
 String text = ""; //storage of txt that will be transmitted to the system.
 String compText = "Hey there, my name is Jane. What's yours? "; //computer's response
 Boolean compTexting = true;
@@ -295,28 +299,52 @@ void keyPressed() {
             String changeLLT = text.trim(); 
             int psn = findKeyword(text.toLowerCase(), "my name is", 0); 
             changeLLT = text.substring(psn+10).trim(); 
-            compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type 'journal' to write an entry."; 
+            compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write new journal entries and access old journal entries. Type 'journal' to write an entry or type 'access' to access old entries."; 
           }
           else if (findKeyword(text.toLowerCase(), "i am", 0) >= 0) { 
             String changeLLT = text.trim(); 
             int psn = findKeyword(text.toLowerCase(), "i am", 0); 
             changeLLT = text.substring(psn+4).trim(); 
-            compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type 'journal' to write an entry.";
+            compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries and access old journal entries. Type 'journal' to write an entry or type 'access' to access old entries.";
         }
          
           else if (findKeyword(compText, "Hey", 0) >= 0) {
             String changeLLT = text.trim();
-            compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries or check out these ... Type 'journal' to write an entry.";
+            compText = "Hi " + changeLLT + ". Here's the fun stuff. You can write journal entries and access old journal entries. Type 'journal' to write an entry or type 'access' to access old entries.";
           } 
           
-          else if (findKeyword(compText,"journal",0) >= 0) { 
+          else if ((((findKeyword(compText,"There! You're done.",0)) >= 0) || ((findKeyword(compText,"Here's the fun stuff.",0)) >= 0)) && (findKeyword(userTexts.get(userTexts.size()-1),"journal",0) >= 0)) { 
             compText = "What entry are you up to? You can check your folder."; 
         }
         
+         else if ((((findKeyword(compText,"There! You're done.",0)) >= 0) || ((findKeyword(compText,"Here's the fun stuff.",0)) >= 0)) && (findKeyword(userTexts.get(userTexts.size()-1),"access",0) >= 0)) { 
+            compText = "What is the filename of the entry you would like to access?"; 
+        }
+        
+         else if ((findKeyword(compText,"What is the filename of the entry you would like to access?",0)) >= 0) {
+            reader = createReader(userTexts.get(userTexts.size()-1)); 
+            try {
+              int prompts = 5;
+              while (prompts > 0) {
+                if (prompts == 5) {
+                  compText = reader.readLine() + "\n";
+                }
+                else {
+                compText += reader.readLine() + "\n";
+                }
+                prompts--;
+              }
+          } catch (Exception e) {
+            compText = "Hmm, there seems to be a problem trying to access that entry.  ";
+            }
+            compText += "What would you like to do next? Type 'journal' to write an entry or type 'access' to access old entries or leave with ESC.";
+        }        
+        
+        /**
           else if ((findKeyword(text.toLowerCase(),"journal",0) >= 0) && (count > 0)){
             compText = "Now you can free-write!!"; 
         }
-          
+          **/
           else if (findKeyword(compText,"You can check your folder.",0) >= 0) { 
             day = userTexts.get(compTexts.size()-1);
             if (isDigit(day.charAt(0))) { 
@@ -345,7 +373,7 @@ void keyPressed() {
           }
           
           else if (findKeyword(compText,"What's your mood?",0) >= 0) { 
-            compText = "Hmm, okay. Something that made you happy today?"; 
+            compText = "Hmm, okay. What is something that made you happy today?"; 
             journal.println(userTexts.get(userTexts.size()-1));
             journal.flush(); // Writes the remaining data to the file
           }
@@ -356,8 +384,14 @@ void keyPressed() {
             journal.flush(); // Writes the remaining data to the file
           }
           
-          else if (findKeyword(compText,"remember?", 0) >= 0) { 
-            compText = "There! You're done. What do you want to do now? Write another entry (type journal) or leave (ESC)..";
+         else if (findKeyword(compText,"remember?",0) >= 0){
+            compText = "Now you can free-write!!"; 
+            journal.println(userTexts.get(userTexts.size()-1));      
+            journal.flush(); // Writes the remaining data to the file
+        }
+          
+          else if (findKeyword(compText,"free-write!!", 0) >= 0) { 
+            compText = "There! You're done. What do you want to do now? Write another entry (type journal), access an entry (type access) or exit for today (ESC).";
             journal.println(userTexts.get(userTexts.size()-1));      
             journal.flush(); // Writes the remaining data to the file
         }
