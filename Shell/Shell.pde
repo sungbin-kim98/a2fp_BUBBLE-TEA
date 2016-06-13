@@ -318,7 +318,7 @@ void keyPressed() {
         }
         
          else if ((((findKeyword(compText,"There! You're done.",0)) >= 0) || ((findKeyword(compText,"Here's the fun stuff.",0)) >= 0)) && (findKeyword(userTexts.get(userTexts.size()-1),"access",0) >= 0)) { 
-            compText = "What is the filename of the entry you would like to access?"; 
+            compText = "What is the filename of the entry you would like to access? (Ex. journalentry.txt)"; 
         }
         
          else if ((findKeyword(compText,"What is the filename of the entry you would like to access?",0)) >= 0) {
