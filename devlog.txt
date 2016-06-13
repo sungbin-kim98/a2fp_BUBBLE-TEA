@@ -260,3 +260,38 @@ Problems:
 After the first time it asks for mood, memory and stuff it has to stop after the second time
 nothing stops the person from entering the response to type like 132.
 
+==============================================================
+==============================================================
+
+Date: 2016-06-12
+--------------------------------------------------------------
+
+User: Jennifer Yu
+Changes: can make multiple files, text changes, solified conditionals, tested
+
+Features
+* Implemented the quick fix where the user types what journal entry they're up to
+* Changed text so that it would flow better and loop back to the 'menu'
+* Added some key words to put you in certain modes
+* Conditionals depend on keywords from the previous line, some weren't specific enough
+* Tested multiple times
+
+==============================================================
+==============================================================
+
+==============================================================
+==============================================================
+
+Date: 2016-06-13
+--------------------------------------------------------------
+
+User: Jennifer Yu
+Changes: saving files works, accessing files works
+
+Features
+* Saving files works, decided to save each line as it is entered
+* Bug fix, needed to .flush() each time a line is saved
+* Accessing files works, needed to have a catch exception, needs user input and will go line by line
+
+==============================================================
+==============================================================
