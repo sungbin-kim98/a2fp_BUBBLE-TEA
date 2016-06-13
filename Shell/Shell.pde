@@ -4,7 +4,6 @@ int frame = 0;
 int count = 0; 
 int textHeight = 0; //for even vertical spacing out between text boxes
 int beg = 0;
-int storePoint = 0;
 String day = "";
 String lastLineText = ""; // only for user
 String text = ""; //storage of txt that will be transmitted to the system.
@@ -15,6 +14,7 @@ Boolean scrollBarOn = false;
 PFont font, bfont;
 PShape textCursor, textBox, leftArc, rightArc, box, scrollBar, scroll;
 ArrayList<String> userTexts = new ArrayList<String>();
+ArrayList<String> journalStorage = new ArrayList<String>();
 ArrayList<String> compTexts = new ArrayList<String>();
 ArrayList<PShape> userTextBoxes = new ArrayList<PShape>();
 ArrayList<PShape> compTextBoxes = new ArrayList<PShape>();
@@ -267,7 +267,7 @@ int findKeyword(String statement, String goal, int startPos) {
   return -1;
 }
 
-
+/*
 boolean fileExists(String path) {
   File file=new File(dataPath(path));
   println(file.getName());
@@ -281,7 +281,7 @@ boolean fileExists(String path) {
     return false;
   }
 } 
-
+*/
 
 
 void keyPressed() {
@@ -333,26 +333,30 @@ void keyPressed() {
           }
 
           else if (findKeyword(userTexts.get(userTexts.size()-1),"Yes",0) >= 0) { 
+            journal = createWriter("journalentry" + day + ".txt"); // Create a new file in the sketch directory
             compText = "What's today's date?";  
             count++;
-            storePoint = compTexts.size();
           }
           
           else if (findKeyword(compText,"What's today's date?",0) >= 0) { 
             compText = "What's your mood?"; 
+            journalStorage.add(userTexts.get(userTexts.size()-1));
           }
           
           else if (findKeyword(compText,"What's your mood?",0) >= 0) { 
             compText = "Hmm, okay. Something that made you happy today?"; 
+            journalStorage.add(userTexts.get(userTexts.size()-1));
           }
 
           else if (findKeyword(compText,"happy",0) >= 0) {
             compText = "Good, remember that. Anything else you want to remember?"; 
+            journalStorage.add(userTexts.get(userTexts.size()-1));            
           }
           
           else if (findKeyword(compText,"remember?", 0) >= 0) { 
             compText = "There! You're done. What do you want to do now? More journal or check out your..";
-          }
+            journalStorage.add(userTexts.get(userTexts.size()-1));            
+        }
           
           else if ((lastLineText.length() == 1) && (lastLineText.equals(" "))) { 
             compText = "Say something. Don't be boring";
@@ -387,6 +391,14 @@ void keyPressed() {
         text += lastLineText;
         lastLineText = "";
       }
+       else if (key == ESC) { 
+        for (int x = 0; x < journalStorage.size(); x++) {
+          journal.println(journalStorage.get(x));
+        }
+        journal.flush(); // Writes the remaining data to the file
+        journal.close(); // Finishes the file
+        exit(); // Stops the program
+       }
     }
     else if ( key == BACKSPACE || key == DELETE ) {
       if ( text.length() <= 0 && lastLineText.length() <= 0 ) { // do nothing
@@ -406,16 +418,6 @@ void keyPressed() {
       else { //if not at the front of a line
         lastLineText = lastLineText.substring( 0, lastLineText.length()-1 ); //deletes data
       }
-       } 
-       else if (key == ESC) { 
-        journal = createWriter("journalentry" + day + ".txt"); // Create a new file in the sketch directory
-        for (int x = storePoint; x < userTexts.size(); x++) {
-          journal.println(userTexts.get(x));
-        }
-        journal.flush(); // Writes the remaining data to the file
-        journal.close(); // Finishes the file
-        exit(); // Stops the program
-       
     } else if ( key == CODED ) { // do nothing
     } else {
       if ( textWidth( lastLineText + key ) > 350 ) { //to prevent cursor misplacement
