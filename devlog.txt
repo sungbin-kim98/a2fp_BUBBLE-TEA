@@ -237,3 +237,17 @@ are traversed, but it only prints the last line, assuming it gets overwritten ea
 when it's true. 
 -- still want to save the answers to the bunch of leading questions to the first journal. 
 
+==============================================================
+==============================================================
+
+Date: 2016-06-12
+--------------------------------------------------------------
+
+User: Sungbin
+Changes: ScrollBar added
+
+Features:
+* appear only when textMsgs exceed the length of the screen (height)
+* you can drag the scroll up and down and the screen will slide accrodingly
+
+==============================================================
