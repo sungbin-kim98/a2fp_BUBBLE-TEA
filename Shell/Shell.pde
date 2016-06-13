@@ -17,7 +17,7 @@ Boolean compTexting = true;
 Boolean shellMode = true;
 Boolean digit = false; 
 Boolean scrollBarOn = false;
-Boolean nameAsked = true;
+Boolean nameAsked = false;
 PFont font, bfont;
 PShape textCursor, textBox, leftArc, rightArc, box, scrollBar, scroll;
 ArrayList<String> userTexts = new ArrayList<String>();
@@ -251,6 +251,7 @@ boolean isDigit(char c) {
   return digit;
 }
 
+
 void keyPressed() {
   if ( compTexting == true ) { //If computer is typing don't do anything
   } else {
@@ -264,27 +265,22 @@ void keyPressed() {
           userTexts.add( text );
 
           //compText Manipulation -------------------------------------------------------------------------------------------------------------
-          if ( nameAsked == true ) {
-            if (findKeyword(text.toLowerCase(), "my name is", 0) >= 0) { 
-              userName = text.trim(); 
-              int psn = findKeyword(text.toLowerCase(), "my name is", 0); 
-              userName = text.substring(psn+10).trim(); 
-              compText = "Hi " + userName + ". Here's the fun stuff. You can write new journal entries and access old journal entries. Type 'journal' to write an entry or type 'access' to access old entries.";
-              nameAsked = false;
-            } 
-            else if (findKeyword(text.toLowerCase(), "i am", 0) >= 0) { 
-              userName = text.trim(); 
-              int psn = findKeyword(text.toLowerCase(), "i am", 0); 
-              userName = text.substring(psn+4).trim(); 
-              compText = "Hi " + userName + ". Here's the fun stuff. You can write journal entries and access old journal entries. Type 'journal' to write an entry or type 'access' to access old entries.";
-              nameAsked = false;  
-            }     
-            else if (findKeyword(compText, "Hey", 0) >= 0) {
-              userName = text.trim();
-              compText = "Hi " + userName + ". Here's the fun stuff. You can write journal entries and access old journal entries. Type 'journal' to write an entry or type 'access' to access old entries.";
-              nameAsked = false;    
-            }   
-          }
+          if (  (findKeyword(text.toLowerCase(), "my name is", 0) >= 0 ) && (findKeyword(compText, "Hey there, my name is Jane. What's yours?", 0) >= 0) ) { 
+            userName = text.trim(); 
+            int psn = findKeyword(text.toLowerCase(), "my name is", 0); 
+            userName = text.substring(psn+10).trim(); 
+            compText = "Hi " + userName + ". Here's the fun stuff. You can write new journal entries and access old journal entries. Type 'journal' to write an entry or type 'access' to access old entries.";
+          } 
+          else if (  (findKeyword(text.toLowerCase(), "i am", 0) >= 0 ) && (findKeyword(compText, "Hey there, my name is Jane. What's yours?", 0) >= 0) ) { 
+            userName = text.trim(); 
+            int psn = findKeyword(text.toLowerCase(), "i am", 0); 
+            userName = text.substring(psn+4).trim(); 
+            compText = "Hi " + userName + ". Here's the fun stuff. You can write journal entries and access old journal entries. Type 'journal' to write an entry or type 'access' to access old entries.";
+          }     
+          else if (findKeyword(compText, "Hey there, my name is Jane. What's yours?", 0) >= 0) {
+            userName = text.trim();
+            compText = "Hi " + userName + ". Here's the fun stuff. You can write journal entries and access old journal entries. Type 'journal' to write an entry or type 'access' to access old entries.";   
+          }   
           else if ( ( ((findKeyword(compText, "What would you like to do next?", 0) >= 0) || (findKeyword(compText, "There! You're done.", 0) >= 0)) || (findKeyword(compText, "Here's the fun stuff", 0) >= 0) || (findKeyword(compText, "Command does not exist.", 0) >= 0)) && (findKeyword(userTexts.get(userTexts.size()-1), "journal", 0) >= 0)) { 
             compText = "What entry are you up to? You can check your folder.";
           } 
@@ -299,12 +295,12 @@ void keyPressed() {
                 if (prompts == 5) {
                   compText = reader.readLine();
                   while ( textWidth( compText ) < 350 ) {
-                    compText += "  ";
+                    compText += " ";
                   }
                 } else {
                   String tmp = reader.readLine();
                   while ( textWidth( tmp ) < 350 ) {
-                    tmp += "  ";
+                    tmp += " ";
                   }
                   compText += tmp;
                 }
