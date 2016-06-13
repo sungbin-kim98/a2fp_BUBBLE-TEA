@@ -340,22 +340,26 @@ void keyPressed() {
           
           else if (findKeyword(compText,"What's today's date?",0) >= 0) { 
             compText = "What's your mood?"; 
-            journalStorage.add(userTexts.get(userTexts.size()-1));
+            journal.println(userTexts.get(userTexts.size()-1));
+            journal.flush(); // Writes the remaining data to the file
           }
           
           else if (findKeyword(compText,"What's your mood?",0) >= 0) { 
             compText = "Hmm, okay. Something that made you happy today?"; 
-            journalStorage.add(userTexts.get(userTexts.size()-1));
+            journal.println(userTexts.get(userTexts.size()-1));
+            journal.flush(); // Writes the remaining data to the file
           }
 
           else if (findKeyword(compText,"happy",0) >= 0) {
             compText = "Good, remember that. Anything else you want to remember?"; 
-            journalStorage.add(userTexts.get(userTexts.size()-1));            
+            journal.println(userTexts.get(userTexts.size()-1));   
+            journal.flush(); // Writes the remaining data to the file
           }
           
           else if (findKeyword(compText,"remember?", 0) >= 0) { 
             compText = "There! You're done. What do you want to do now? More journal or check out your..";
-            journalStorage.add(userTexts.get(userTexts.size()-1));            
+            journal.println(userTexts.get(userTexts.size()-1));      
+            journal.flush(); // Writes the remaining data to the file
         }
           
           else if ((lastLineText.length() == 1) && (lastLineText.equals(" "))) { 
@@ -392,9 +396,11 @@ void keyPressed() {
         lastLineText = "";
       }
        else if (key == ESC) { 
+         /**
         for (int x = 0; x < journalStorage.size(); x++) {
           journal.println(journalStorage.get(x));
         }
+        **/
         journal.flush(); // Writes the remaining data to the file
         journal.close(); // Finishes the file
         exit(); // Stops the program
