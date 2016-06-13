@@ -10,6 +10,7 @@ String text = ""; //storage of txt that will be transmitted to the system.
 String compText = "Hey there, my name is Jane. What's yours? "; //computer's response
 Boolean compTexting = true;
 Boolean shellMode = true;
+Boolean digit = false; 
 Boolean scrollBarOn = false;
 PFont font, bfont;
 PShape textCursor, textBox, leftArc, rightArc, box, scrollBar, scroll;
@@ -267,22 +268,15 @@ int findKeyword(String statement, String goal, int startPos) {
   return -1;
 }
 
-/*
-boolean fileExists(String path) {
-  File file=new File(dataPath(path));
-  println(file.getName());
-  boolean exists = file.exists();
-  if (exists) {
-    println("true");
-    return true;
+boolean isDigit(char c) { 
+  if (c > '0' && c <= '9') { 
+    digit = true; 
   }
-  else {
-    println("false");
-    return false;
-  }
-} 
-*/
-
+  else { 
+    digit =  false; 
+  } 
+  return digit; 
+}
 
 void keyPressed() {
   if ( compTexting == true ) { //If computer is typing don't do anything
@@ -320,13 +314,19 @@ void keyPressed() {
         }
         
           else if ((findKeyword(text.toLowerCase(),"journal",0) >= 0) && (count > 0)){
-            compText = "You're now in journal mode! Write an entry and click ESC to return to shellmode and your entry will be saved."; 
+            compText = "Now you can free-write!!"; 
         }
           
           else if (findKeyword(compText,"You can check your folder.",0) >= 0) { 
             day = userTexts.get(compTexts.size()-1);
+            if (isDigit(day.charAt(0))) { 
             compText = "Are you sure you're up to entry" + day + "?  Type Yes or No."; 
+            }
+            else { 
+              compText = "Invalid command. Please enter a number. You can check your folder."; 
+               
           }          
+          }
           
           else if (findKeyword(userTexts.get(userTexts.size()-1),"No",0) >= 0) { 
             compText = "What entry are you up to? You can check your folder."; 

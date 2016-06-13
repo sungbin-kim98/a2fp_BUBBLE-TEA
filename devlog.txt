@@ -251,3 +251,12 @@ Features:
 * you can drag the scroll up and down and the screen will slide accrodingly
 
 ==============================================================
+
+Date: 2016-06-12 
+
+User: Mei 
+Changes: Only allow numbers to be inputted for one prompt, fixed backspace bug, minor changes with word responses. 
+Problems:
+After the first time it asks for mood, memory and stuff it has to stop after the second time
+nothing stops the person from entering the response to type like 132.
+
